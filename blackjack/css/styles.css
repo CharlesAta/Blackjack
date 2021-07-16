@@ -1,0 +1,61 @@
+#mainContainer {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    grid-template-areas: 
+    'ttl ttl ttl ttl ttl ttl ttl'
+    '. . scr scr scr . .'
+    'msg msg msg msg msg msg msg'
+    '. brd brd brd brd brd .'
+    '. brd brd brd brd brd .'
+    '. brd brd brd brd brd .'
+    '. brd brd brd brd brd .'
+    '. brd brd brd brd brd .'
+    '. brd brd brd brd brd .'
+    'ftr ftr ftr ftr ftr ftr ftr';
+    height: 100vh;
+    width: 100vh;
+    min-width: 1000px;
+    align-content: center;
+    margin: auto;
+}
+
+header {
+    grid-area: ttl;
+    background-color: #48BEFF;
+    text-align: center;
+}
+
+section#scoreboard {
+    grid-area: scr;
+    background-color: #3DFAFF;
+    display: flex;
+    justify-content: space-around;
+}
+
+section#message {
+    grid-area: msg;
+    background-color: #43C59E;
+}
+
+main {
+    grid-area: brd;
+    background-color: #3D7068;
+}
+
+footer {
+    grid-area: ftr;
+    background-color: #14453D;
+}
+
+#gameTable {
+    /* background-color: white; */
+    border-radius: 50%;
+    height: 100%;
+    background-image: url("https://www.playsmart.ca/wp-content/uploads/2020/04/breaking-down-the-table.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: grid;
+    grid-template-columns: 30% 1fr 30%;
+    grid-template-rows: 20% 1fr 30% 12.5%;
+}
