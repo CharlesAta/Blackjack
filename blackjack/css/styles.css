@@ -20,9 +20,27 @@
     margin: auto;
 }
 
+.background-image {
+    background-image: url('https://cdna.artstation.com/p/assets/images/images/017/099/450/large/patricia-kelen-takahashi-patriciakelen-com-10.jpg?1554648614');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    filter: blur(1px);
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index:-1;
+    margin: 0;
+}
+
 header {
     grid-area: ttl;
-    background-color: #48BEFF;
+    background-color: rgba(0, 0, 0, 0.4);
+    text-align: center;
+    /* NEON FONT */
+    font-family: 'Monoton', cursive;
+    font-size: 1em;
     text-align: center;
 }
 
@@ -33,19 +51,22 @@ section#scoreboard {
     justify-content: space-around;
 }
 
-section#message {
+section#messageArea {
     grid-area: msg;
     background-color: #43C59E;
 }
 
 main {
     grid-area: brd;
-    background-color: #3D7068;
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 footer {
     grid-area: ftr;
     background-color: #14453D;
+    display: grid;
+    grid-template-columns: 15% 1fr 1fr 1fr 15%;
+
 }
 
 #gameTable {
@@ -56,6 +77,47 @@ footer {
     background-repeat: no-repeat;
     background-size: cover;
     display: grid;
-    grid-template-columns: 30% 1fr 30%;
-    grid-template-rows: 20% 1fr 30% 12.5%;
+    grid-template-columns: 25% 1fr 25%;
+    grid-template-rows: 20% 1fr 25% 12.5%;
+}
+
+#dealer {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#player {
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#play {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: bisque;
+    grid-column: 1 / 2;
+}
+
+#moves {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: bisque;
+    grid-column: 3 / 4;
+}
+
+#currentHand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: bisque;
+    grid-column: 5 / 6;
 }

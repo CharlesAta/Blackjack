@@ -5,41 +5,56 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vingt-et-Un</title>
+    <!-- NEON FONT -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Monoton&effect=neon">
+    <link rel="stylesheet" href="./card-deck-css/css/cardstarter.css" />
     <link rel="stylesheet" href="./css/styles.css" />
-    <script src="./js/app.js"></script>
+    <script defer src="./js/app.js"></script>
 </head>
 <body id="mainContainer">
+    <div class="background-image"></div>
     <header id="title">
-        <h1>Vingt-et-Un</h1>
+        <h1 class="font-effect-neon">Vingt-et-Un</h1>
     </header>
     <section id="scoreboard">
-        <div>W</div>
-        <div>L</div>
-        <div>T</div>
+        <div id="win">
+            <h2>WINS</h2>
+            <span></span>
+        </div>
+        <div id="loss">
+            <h2>LOSSES</h2>
+            <span></span>
+        </div>
+        <div id="tie">
+            <h2>TIES</h2>
+            <span></span>
+        </div>
     </section>
-    <section id="message">
-        <div></div>
+    <section id="messageArea">
+        <h2 id="message"> PRESS PLAY TO START</h2>
     </section>
     <main>
         <div id="gameTable">
             <div id="dealer">
-                <div class="cards">Test</div>
+                <div class="card d10"></div>
+                <div class="card back">Test</div>
             </div>
             <div id="player">
-                <div class="cards">Test</div>
+            <!-- Player cards appear here -->
             </div>
         </div>
     </main>
-    <footer>
-        <div>
-            <button id="play"></button>
+    <footer id="options">
+        <div id="play">
+            <button id="play-btn">PLAY</button>
         </div>
-        <div>
-            <button id="stand make-move"></button>
-            <button id="hit make-move"></button>
+        <div id="moves">
+            <button id="stand-btn">STAND</button>
+            <button id="hit-btn">HIT</button>
         </div>
-        <div>
-            <p id="playerHandTotal"></p>
+        <div id="currentHand">
+            <h3>CURRENT HAND:</h3>
+            <span></span>
         </div>
     </footer>
 </body>
