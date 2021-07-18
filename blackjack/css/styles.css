@@ -4,7 +4,7 @@
     grid-template-rows: repeat(10, 1fr);
     grid-template-areas: 
     'ttl ttl ttl ttl ttl ttl ttl'
-    '. . scr scr scr . .'
+    '. scr scr scr scr scr .'
     'msg msg msg msg msg msg msg'
     '. brd brd brd brd brd .'
     '. brd brd brd brd brd .'
@@ -56,7 +56,23 @@ section#scoreboard {
     grid-area: scr;
     background-color: #3DFAFF;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    width: 60%;
+    justify-self: center;
+}
+
+#reset-area {
+    display: flex;
+    align-items: center;
+    width: 10%;
+}
+
+#reset-btn {
+    width: 2em;
+    height: 2em;
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Refresh_icon.svg/1200px-Refresh_icon.svg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 section#messageArea {

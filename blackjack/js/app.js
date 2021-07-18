@@ -18,6 +18,7 @@ let winner = '';
 let hit = false;
 let cardsInPlay = [];
 let startClickCount = 0;
+let resetScore = false;
 
 /*----- cached element references -----*/
 const playBtn = document.querySelector('#play-btn');
@@ -26,9 +27,11 @@ const standBtn = document.querySelector('#stand-btn');
 const options = document.querySelector('#options');
 
 const message = document.querySelector('#message');
+
 const winScore = document.querySelector('#win > span');
 const lossScore = document.querySelector('#loss > span');
 const tieScore = document.querySelector('#tie > span');
+const resetScoreBtn = document.querySelector('#reset-btn');
 
 const dealerArea = document.querySelector('#dealer');
 const playerArea = document.querySelector('#player');
@@ -37,6 +40,7 @@ const currentHandArea = document.querySelector('#currentHand > span');
 
 /*----- event listeners -----*/
 options.addEventListener('click', handleClick);
+resetScoreBtn.addEventListener('click', resetScoreboard);
 
 /*----- functions -----*/
 
@@ -59,6 +63,10 @@ function createDeck(){
             }
         }
     }
+
+function onLoad() {
+    disableMoves();
+}
 
 function handleClick(evt) {
     // Function to handle buttons being clicked
@@ -166,11 +174,6 @@ function checkWinner() {
             winner = 'tie';
     }
     render();
-    // Delete this when done
-    console.log(winner)
-    console.log(playersHandTotal)
-    console.log(dealersHandTotal)
-    // Delete this when done
 }
 
 function handleHit() {
@@ -217,21 +220,29 @@ function flipDealerCard() {
     dealerHiddenCard.classList.remove('back-blue')
 }
 
-
 function render(){
     // Function to update the state variables and render to DOM
+    // If the player hits, update their hand
     if (hit) {
         hit = false;
         updateCurrHandTotal();
     }
+
+    // If a winner exists
     if (winner) {
         flipDealerCard();
         disableMoves();
         updateScoreboard();
         playAgain();
     }
-    updateMessage();
     
+    // If the scoreboard is reset
+    if (resetScore) {
+        updateScoreboard();
+        resetScore = false;
+    } else {
+        updateMessage();
+    }
 }
 
 function disableMoves() {
@@ -247,6 +258,15 @@ function enableMoves(){
 }
 
 function updateScoreboard() {
+    // If the scoreboard is to be reset
+    if (resetScore) {
+        winScore.textContent = "";
+        lossScore.textContent = "";
+        tieScore.textContent = "";
+        return;
+    }
+
+    // Otherwise, if a winner exists
     switch (winner) {
         case 'player':
             wltScore[0] += 1;
@@ -263,7 +283,18 @@ function updateScoreboard() {
     }
 }
 
+function resetScoreboard(evt) {
+    // Function to handle a click event to reset the scoreboard 
+    resetScore = true;
+    if (evt.target === resetScoreBtn) {
+        wltScore = [0, 0, 0];
+    }
+
+    render();
+}
+
 function updateMessage() {
+    // Function to update the output message
     switch (winner) {
         case 'player':
             outputMessage = randomizer(winMessages);
@@ -283,21 +314,19 @@ function updateMessage() {
 }
 
 function randomizer(arr){
+    // Function to select a random element from an array
     return arr[Math.floor(Math.random() * arr.length)]
 }
 
 function playAgain() {
+    // Function to update the play button
     playBtn.textContent = "PLAY AGAIN?";
 }
 
 function updateCurrHandTotal() {
-
+    // Function to update the player's hand total in the DOM
     currentHandArea.textContent = playersHandTotal;
 }
 
+onLoad();
 createDeck();
-
-// Delete this when done
-console.log(playersHand);
-console.log(dealersHand);
-// Delete this when done
