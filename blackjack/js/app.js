@@ -7,9 +7,10 @@ const cards = [];
 let playersHand = [];
 let dealersHand = [];
 let wltScore = [0, 0, 0];
-let outputMessage = "";
+let outputMessage = '';
 let playersHandTotal = 0;
 let dealersHandTotal = 0;
+let winner = '';
 
 /*----- cached element references -----*/
 const playBtn = document.querySelector('#play-btn');
@@ -61,36 +62,40 @@ function handleClick(evt) {
 }
 
 function init() {
-    playerStartingCards();
-
+    winner = '';
+    startingCards(playerArea, playersHand, playersHandTotal, 'player');
+    startingCards(dealerArea, dealersHand, dealersHandTotal, 'dealer');
 }
 
-function playerStartingCards(){
-    // Initialize the player's starting hand
-    playerArea.innerHTML = "";
-    let playerCard1 = document.createElement('div');
-    let playerCard2 = document.createElement('div');
+function startingCards(area, hand, total, holder){
+    // Initialize the starting hand
+    area.innerHTML = '';
+    let card1 = document.createElement('div');
+    let card2 = document.createElement('div');
 
-    playersHand = [];
-    playersHandTotal = 0;
-    firstTwo(playersHand);
+    hand = [];
+    total = 0;
+    firstTwo(hand);
 
-    playerCard1.classList.add('card', `${playersHand[0].face}`);
-    playersHandTotal += playersHand[0].value;
-    playerCard2.classList.add('card', `${playersHand[1].face}`);
-    playersHandTotal += playersHand[1].value;
+    card1.classList.add('card', `${hand[0].face}`);
+    total += hand[0].value;
+    if (holder == 'player') {
+        card2.classList.add('card', `${hand[1].face}`);
+    } else {
+        card2.classList.add('card', 'back-blue');
+    }
+    total += hand[1].value;
 
-    playersHandTotal = checkAce(playersHand, playersHandTotal);
+    if (holder == 'player') {
+        playersHandTotal = checkAce(hand, total);
+        playersHand = hand;
+    } else {
+        dealersHandTotal = total;
+        dealersHand = hand;
+    }
 
-    playerArea.appendChild(playerCard1);
-    playerArea.appendChild(playerCard2);
-    
-    console.log(playersHand);
-    console.log(playersHandTotal);
-}
-
-function dealerStartingCards(){
-
+    area.appendChild(card1);
+    area.appendChild(card2);
 }
 
 function firstTwo(hand) {
@@ -106,7 +111,7 @@ function firstTwo(hand) {
 function checkAce(hand, total){
     // Function to return an updated total hand value if an Ace is drawn and the total is over 21
     for (let i = 0; i < hand.length; i++){
-        if (hand[i].face.includes("A") && hand[i].value === 11 && total > 21) {
+        if (hand[i].face.includes('A') && hand[i].value === 11 && total > 21) {
             hand[i].value = 1;
             total -= 10;
         }
@@ -114,6 +119,38 @@ function checkAce(hand, total){
     return total;
 }
 
+function handleStand() {
+    checkWinner();
+}
+
+function checkWinner() {
+    
+    if (playersHandTotal === 21 || 
+        (playersHandTotal > dealersHandTotal && playersHandTotal < 21)){
+            winner = 'player';
+    }
+    else if (dealersHandTotal === 21 ||
+        (playersHandTotal < dealersHandTotal && dealersHandTotal < 21)){
+            winner = 'dealer';
+    } 
+    else if (playersHandTotal === dealersHandTotal){
+            winner = 'tie';
+    }
+    render();
+    console.log(winner)
+    console.log(playersHandTotal)
+    console.log(dealersHandTotal)
+}
+
+function render(){
+    if (winner) {
+        let dealerHiddenCard = document.querySelector('#dealer > div:last-child');
+        dealerHiddenCard.classList.add(`${dealersHand[1].face}`)
+        dealerHiddenCard.classList.remove('back-blue')
+    }
+}
+
 createDeck();
 
 console.log(playersHand);
+console.log(dealersHand);
