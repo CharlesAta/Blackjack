@@ -3,6 +3,10 @@ const suits = ['d', 'h', 's', 'c'];
 const cardTypes = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
 const cards = [];
 
+const winMessages = ['CONGRATULATION!<br />YOU WIN!', 'GREAT JOB!<br />YOU WON!', 'YOU WIN!<br />THE DEALER NEVER STOOD A CHANCE', "YOU WIN!<br />ARE YOU COUNTING CARDS? YOU'RE TOO GOOD!"];
+const lossMessages = ['YOU LOST!<br />BETTER LUCK NEXT TIME!', "GUESS IT'S NOT YOUR LUCKY DAY!<br />YOU LOST!", 'YOU LOST!<br />TIME TO PAY UP!'];
+const tieMessages = ["NOT A WIN BUT NOT A LOSS, IT'S A TIE", "IT'S A TIE!"];
+
 /*----- app's state (variables) -----*/
 let playersHand = [];
 let dealersHand = [];
@@ -13,6 +17,7 @@ let dealersHandTotal = 0;
 let winner = '';
 let hit = false;
 let cardsInPlay = [];
+let startClickCount = 0;
 
 /*----- cached element references -----*/
 const playBtn = document.querySelector('#play-btn');
@@ -27,6 +32,8 @@ const tieScore = document.querySelector('#tie > span');
 
 const dealerArea = document.querySelector('#dealer');
 const playerArea = document.querySelector('#player');
+
+const currentHandArea = document.querySelector('#currentHand > span');
 
 /*----- event listeners -----*/
 options.addEventListener('click', handleClick);
@@ -65,10 +72,17 @@ function handleClick(evt) {
 }
 
 function init() {
+    startClickCount++;
+    if (startClickCount >= 1){
+        playBtn.textContent = "RESET";
+    }
     winner = '';
     startingCards(playerArea, playersHand, playersHandTotal, 'player');
     startingCards(dealerArea, dealersHand, dealersHandTotal, 'dealer');
+    
     enableMoves();
+    updateCurrHandTotal();
+    render();
 }
 
 function startingCards(area, hand, total, holder){
@@ -109,7 +123,7 @@ function startingCards(area, hand, total, holder){
 function firstTwo(hand) {
     // Function to push two random, different cards to the hand
     while (hand.length < 2) {
-        let card = cards[Math.floor(Math.random()*cards.length)];
+        let card = randomizer(cards);
         if (!cardsInPlay.includes(card)) {
             hand.push(card);
             cardsInPlay.push(card);
@@ -169,7 +183,7 @@ function handleHit() {
 
     // Add a new card that is not already in play
     while (playersHand.length <= currentHandLength) {
-        let card = cards[Math.floor(Math.random()*cards.length)];
+        let card = randomizer(cards);
         if (!cardsInPlay.includes(card)) {
             playersHand.push(card);
             cardsInPlay.push(card);
@@ -206,13 +220,18 @@ function flipDealerCard() {
 
 function render(){
     // Function to update the state variables and render to DOM
+    if (hit) {
+        hit = false;
+        updateCurrHandTotal();
+    }
     if (winner) {
         flipDealerCard();
         disableMoves();
+        updateScoreboard();
+        playAgain();
     }
-    if (hit) {
-        hit = false;
-    }
+    updateMessage();
+    
 }
 
 function disableMoves() {
@@ -225,6 +244,55 @@ function enableMoves(){
     // Function to enable the stand and hit buttons
     standBtn.disabled = false;
     hitBtn.disabled = false;
+}
+
+function updateScoreboard() {
+    switch (winner) {
+        case 'player':
+            wltScore[0] += 1;
+            winScore.textContent = wltScore[0];  
+            break;
+        case 'dealer':
+            wltScore[1] += 1;
+            lossScore.textContent = wltScore[1];
+            break;
+        case 'tie':
+            wltScore[2] += 1;
+            tieScore.textContent = wltScore[2];
+            break;
+    }
+}
+
+function updateMessage() {
+    switch (winner) {
+        case 'player':
+            outputMessage = randomizer(winMessages);
+            message.innerHTML = outputMessage;
+            break;
+        case 'dealer':
+            outputMessage = randomizer(lossMessages);
+            message.innerHTML = outputMessage;
+            break;
+        case 'tie':
+            outputMessage = randomizer(tieMessages);
+            message.innerHTML = outputMessage;
+            break;
+        default:
+            message.textContent = "MAKE YOUR MOVE BELOW";
+    }
+}
+
+function randomizer(arr){
+    return arr[Math.floor(Math.random() * arr.length)]
+}
+
+function playAgain() {
+    playBtn.textContent = "PLAY AGAIN?";
+}
+
+function updateCurrHandTotal() {
+
+    currentHandArea.textContent = playersHandTotal;
 }
 
 createDeck();
