@@ -3,8 +3,8 @@ const suits = ['d', 'h', 's', 'c'];
 const cardTypes = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
 const cards = [];
 
-const winMessages = ['CONGRATULATION!<br />YOU WIN!', 'GREAT JOB!<br />YOU WON!', 'YOU WIN!<br />THE DEALER NEVER STOOD A CHANCE', "YOU WIN!<br />ARE YOU COUNTING CARDS? YOU'RE TOO GOOD!"];
-const lossMessages = ['YOU LOST!<br />BETTER LUCK NEXT TIME!', "GUESS IT'S NOT YOUR LUCKY DAY!<br />YOU LOST!", 'YOU LOST!<br />TIME TO PAY UP!'];
+const winMessages = ['CONGRATULATION! YOU WIN!', 'GREAT JOB! YOU WON!', 'YOU WIN! THE DEALER NEVER STOOD A CHANCE', "YOU WIN! ARE YOU COUNTING CARDS? YOU'RE TOO GOOD!"];
+const lossMessages = ['YOU LOST! BETTER LUCK NEXT TIME!', "GUESS IT'S NOT YOUR LUCKY DAY! YOU LOST!", 'YOU LOST! TIME TO PAY UP!'];
 const tieMessages = ["NOT A WIN BUT NOT A LOSS, IT'S A TIE", "IT'S A TIE!"];
 
 /*----- app's state (variables) -----*/

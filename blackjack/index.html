@@ -6,28 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vingt-et-Un</title>
     <!-- NEON FONT -->
+    <link rel="stylesheet" href="./css/external-styles.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Monoton&effect=neon">
     <link rel="stylesheet" href="./card-deck-css/css/cardstarter.css" />
     <link rel="stylesheet" href="./css/styles.css" />
+    <script defer src="./js/external-js.js"></script>
     <script defer src="./js/app.js"></script>
 </head>
 <body id="mainContainer">
     <div class="background-image"></div>
-    <header id="title">
-        <h1 class="font-effect-neon">Vingt-et-Un</h1>
+    <header id="title" class="title-container">
+        <div class="neon">BLACK</div><div class="flux">JACK</div>
     </header>
-    <section id="scoreboard">
-        <div id="win">
+    <section id="scoreboard" class="x-sign">
+        <div id="win" class="score">
             <h2>WINS</h2>
-            <span></span>
+            <span class="scoreNum"></span>
         </div>
-        <div id="loss">
+        <div id="loss" class="score">
             <h2>LOSSES</h2>
-            <span></span>
+            <span class="scoreNum"></span>
         </div>
-        <div id="tie">
+        <div id="tie" class="score">
             <h2>TIES</h2>
-            <span></span>
+            <span class="scoreNum"></span>
         </div>
         <div id="reset-area">
             <button id="reset-btn"></button>
