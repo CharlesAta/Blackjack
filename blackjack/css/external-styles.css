@@ -87,6 +87,25 @@
     font-family: Gruppo;
 }
 
+.y-sign {
+    --interval: 1s;
+    display: block;
+    text-shadow: 
+      0 0 10px var(--color1),
+      0 0 20px var(--color2),
+      0 0 40px var(--color3),
+      0 0 80px var(--color4);
+    will-change: filter, color;
+    filter: saturate(60%);
+    animation: flicker steps(100) var(--interval) 1s infinite;
+    color: tomato;
+    --color1: orangered;
+    --color2: firebrick;
+    --color3: maroon;
+    --color4: darkred;
+    font-family: Yellowtail;
+}
+
 @keyframes flicker {
     50% {
       color: white;
@@ -114,7 +133,7 @@
   display: flex;
   justify-content: center;
   align-items: center;  
-  background: rgba(0,0,0,0.6);
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.5), transparent);
   max-height: 80%;
   width: 100%;
 }
@@ -178,3 +197,112 @@ h2#message:focus {
 }
 
 /* ^^^^^^^^^^^^^ CSS for message board styling. Source: https://codepen.io/GeorgePark/pen/MrjbEr */
+
+/* vvvvvvvvvvv CSS for buttons styling. Source: https://codepen.io/Stockin/pen/XPvpoB */
+#play:nth-of-type() {
+    content: '';
+    top:0;
+    left:0;
+    width: 25%;
+    height: 25%;
+    border-radius:50%;
+    background: #00d39e;
+    transition: .5s;
+    transform: scale(.9);
+    z-index: -1;
+}
+  
+#play-btn:hover:before {
+    transform: scale(1.2);
+    box-shadow: 0 0 30px #00ffbf;
+    filter: blur(3px);
+}
+  
+#play-btn:hover {
+    color: #0fb48b;
+    box-shadow: 0 0 30px #00ffbf;
+    text-shadow: 0 0 50px #0fb48b;
+    font-style: italic;
+    letter-spacing: 2px;
+    transition: font-style 3s, letter-spacing 5s;
+}
+
+#play-btn:active {
+    color: black;
+    box-shadow: 0 0 30px #00ffbf;
+    text-shadow: 0 0 20px  black;
+    font-style: italic;
+    letter-spacing: 2px;
+    background-color: #00ffbf;
+    font-weight: 900;
+}
+
+#moves:nth-of-type() {
+    content: '';
+    top:0;
+    left:0;
+    width: 25%;
+    height: 25%;
+    border-radius:50%;
+    background: #d39b00;
+    transition: .5s;
+    transform: scale(.9);
+    z-index: -1;
+}
+  
+#stand-btn:hover:before:enabled, #hit-btn:hover:before:enabled {
+    transform: scale(1.2);
+    box-shadow: 0 0 20px #d39b00;
+    filter: blur(3px);
+}
+  
+#stand-btn:hover:enabled, #hit-btn:hover:enabled {
+    color: #ffa502;
+    box-shadow: 0 0 20px #d39b00;
+    text-shadow: 0 0 20px #d39b00;
+}
+
+#stand-btn:active:enabled, #hit-btn:active:enabled {
+    color: black;
+    box-shadow: 0 0 30px #d39b00;
+    text-shadow: 0 0 20px  black;
+    font-style: italic;
+    letter-spacing: 2px;
+    background-color: #d39b00;
+    font-weight: 900;
+}
+
+#reset-area:nth-of-type() {
+    content: '';
+    top:0;
+    left:0;
+    width: 25%;
+    height: 25%;
+    border-radius:50%;
+    background: #88d609;
+    transition: .5s;
+    transform: scale(.9);
+    z-index: -1;
+}
+  
+#reset-btn:hover:before {
+    transform: scale(1.2);
+    box-shadow: 0 0 20px #88d609;
+    filter: blur(3px);
+}
+  
+#reset-btn:hover {
+    color: #88d609;
+    box-shadow: 0 0 20px #88d609;
+    text-shadow: 0 0 20px #88d609;
+}
+
+#reset-btn:active {
+    color: black;
+    box-shadow: 0 0 30px #88d609;
+    text-shadow: 0 0 20px  black;
+    font-style: italic;
+    letter-spacing: 2px;
+    background-color: #88d609;
+    font-weight: 900;
+}

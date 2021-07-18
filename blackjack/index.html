@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vingt-et-Un</title>
-    <!-- NEON FONT -->
+    <title>BLACKJACK</title>
     <link rel="stylesheet" href="./css/external-styles.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Monoton&effect=neon">
     <link rel="stylesheet" href="./card-deck-css/css/cardstarter.css" />
     <link rel="stylesheet" href="./css/styles.css" />
     <script defer src="./js/external-js.js"></script>
@@ -19,6 +17,7 @@
         <div class="neon">BLACK</div><div class="flux">JACK</div>
     </header>
     <section id="scoreboard" class="x-sign">
+        <!-- Shows Wins, Losses, Ties -->
         <div id="win" class="score">
             <h2>WINS</h2>
             <span class="scoreNum"></span>
@@ -32,31 +31,37 @@
             <span class="scoreNum"></span>
         </div>
         <div id="reset-area">
+            <!-- Resets scoreboard -->
             <button id="reset-btn"></button>
         </div>
     </section>
     <section id="messageArea">
+        <!-- Messages are updated below -->
         <h2 id="message">PRESS PLAY TO START</h2>
     </section>
     <main>
         <div id="gameTable">
+            <h3 id="d-hand" class="holder-location">DEALER'S HAND:</h3>
             <div id="dealer">
             <!-- Dealer cards appear here -->
             </div>
+            <h3 id="p-hand" class="holder-location">PLAYER'S HAND:</h3>
             <div id="player">
             <!-- Player cards appear here -->
             </div>
         </div>
     </main>
     <footer id="options">
-        <div id="play">
+        <!-- Buttons to play the game -->
+        <div id="play" class="option-bar">
             <button id="play-btn">PLAY</button>
         </div>
-        <div id="moves">
+        <div id="moves" class="option-bar">
             <button id="stand-btn">STAND</button>
             <button id="hit-btn">HIT</button>
         </div>
-        <div id="currentHand">
+        <!-- Output of player's hand summation -->
+        <div id="currentHand" class="y-sign option-bar">
             <h3>CURRENT HAND:</h3>
             <span></span>
         </div>
