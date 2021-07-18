@@ -34,14 +34,22 @@
     margin: 0;
 }
 
-header {
+#title {
     grid-area: ttl;
     background-color: rgba(0, 0, 0, 0.4);
     text-align: center;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+h1.font-effect-neon {
     /* NEON FONT */
     font-family: 'Monoton', cursive;
-    font-size: 1em;
+    font-size: 5em;
     text-align: center;
+    margin: 0 auto;
+    width: 100%
 }
 
 section#scoreboard {
