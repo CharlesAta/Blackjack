@@ -200,41 +200,6 @@ h2#message:focus {
 
 /* vvvvvvvvvvv CSS for buttons styling. Source: https://codepen.io/Stockin/pen/XPvpoB */
 
-/* #moves:nth-of-type() {
-    content: '';
-    top:0;
-    left:0;
-    width: 25%;
-    height: 25%;
-    border-radius:50%;
-    background: #d39b00;
-    transition: .5s;
-    transform: scale(.9);
-    z-index: -1;
-}
-  
-#stand-btn:hover:before:enabled, #hit-btn:hover:before:enabled {
-    transform: scale(1.2);
-    box-shadow: 0 0 20px #d39b00;
-    filter: blur(3px);
-}
-  
-#stand-btn:hover:enabled, #hit-btn:hover:enabled {
-    color: #ffa502;
-    box-shadow: 0 0 20px #d39b00;
-    text-shadow: 0 0 20px #d39b00;
-}
-
-#stand-btn:active:enabled, #hit-btn:active:enabled {
-    color: black;
-    box-shadow: 0 0 30px #d39b00;
-    text-shadow: 0 0 20px  black;
-    font-style: italic;
-    letter-spacing: 2px;
-    background-color: #d39b00;
-    font-weight: 900;
-} */
-
 #reset-area:nth-of-type() {
     content: '';
     top:0;
@@ -299,7 +264,11 @@ h2#message:focus {
   border-radius: 10px;
   box-shadow: 0px 0px 15px black;
 }
- 
+
+.stand-cont {
+    margin-right: 2em;
+}
+
 .button {
   width: 100%;
   height: 100%;
@@ -313,6 +282,14 @@ h2#message:focus {
   outline: none;
   transition: box-shadow 0.3s linear;
   box-shadow: inset 0px 0px 5px black, inset 0px 0px 0px #F7EA25;
+}
+
+#play-btn.button {
+    background-color: #F75780;
+}
+
+#stand-btn.button, #hit-btn.button {
+    background-color: #003566;
 }
 
 .button:active {
@@ -420,27 +397,90 @@ h2#message:focus {
   pointer-events: none;  
 }
 
-p:nth-child(1n) {
+.play-text > p:nth-child(1n) {
   transform: rotate(8deg);
   animation: shake 0.5s ease infinite;
   color: #F7EA25
 }
 
-  p:nth-child(2n) {
+.play-text > p:nth-child(2n) {
   transform: rotate(5deg);
   animation: shake 0.5s ease-out infinite reverse;
   color: white
 }
 
-p:nth-child(3n) {
+.play-text > p:nth-child(3n) {
   transform: rotate(-2deg);
   animation: shake 0.5s 0.1s ease infinite;
 }
 
- p:nth-child(4n) {
+.play-text > p:nth-child(4n) {
     transform: rotate(-5deg);
     animation: shake 0.5s ease-in infinite reverse;
 }
+
+.stand-text  p:nth-child(1n) {
+    color: #fca311
+}
+  
+.stand-text   p:nth-child(2n) {
+    color: #ca6702
+}
+
+.stand-cont #stand-btn:hover:enabled p:nth-child(1n) {
+    transform: rotate(8deg);
+    animation: shake 0.5s ease infinite;
+    color: #fca311
+}
+  
+.stand-cont #stand-btn:hover:enabled p:nth-child(2n) {
+    transform: rotate(5deg);
+    animation: shake 0.5s ease-out infinite reverse;
+    color: #ca6702
+}
+  
+.stand-cont #stand-btn:hover:enabled p:nth-child(3n) {
+    transform: rotate(-2deg);
+    animation: shake 0.5s 0.1s ease infinite;
+}
+  
+.stand-cont #stand-btn:hover:enabled p:nth-child(4n) {
+      transform: rotate(-5deg);
+      animation: shake 0.5s ease-in infinite reverse;
+}
+  
+.hit-text  p:nth-child(1n) {
+    color: #ca6702;
+}
+  
+.hit-text   p:nth-child(2n) {
+    color: #fca311
+}
+
+.hit-cont #hit-btn:hover:enabled p:nth-child(1n) {
+    transform: rotate(8deg);
+    animation: shake 0.5s ease infinite;
+    color: #ca6702
+}
+  
+.hit-cont #hit-btn:hover:enabled p:nth-child(2n) {
+    transform: rotate(5deg);
+    animation: shake 0.5s ease-out infinite reverse;
+    color: #fca311
+}
+  
+.hit-cont #hit-btn:hover:enabled p:nth-child(3n) {
+    transform: rotate(-2deg);
+    animation: shake 0.5s 0.1s ease infinite;
+}
+  
+.hit-cont #hit-btn:hover:enabled p:nth-child(4n) {
+      transform: rotate(-5deg);
+      animation: shake 0.5s ease-in infinite reverse;
+}
+
+
+
 
 @keyframes shake {
     0% {
