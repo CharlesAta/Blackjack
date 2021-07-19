@@ -72,6 +72,7 @@ function handleClick(evt) {
     // Function to handle buttons being clicked
     if (evt.target === playBtn) {
         init();
+        // console.log('PLAY')
     } else if (evt.target === standBtn) {
         handleStand();
     } else if (evt.target === hitBtn) {
@@ -82,7 +83,7 @@ function handleClick(evt) {
 function init() {
     startClickCount++;
     if (startClickCount >= 1){
-        playBtn.textContent = "RESET";
+        playButtonText('reset');
     }
     winner = '';
     startingCards(playerArea, playersHand, playersHandTotal, 'player');
@@ -237,7 +238,7 @@ function render(){
         flipDealerCard();
         disableMoves();
         updateScoreboard();
-        playAgain();
+        playButtonText('play again?');
     }
     
     // If the scoreboard is reset
@@ -322,9 +323,21 @@ function randomizer(arr){
     return arr[Math.floor(Math.random() * arr.length)]
 }
 
-function playAgain() {
+function playButtonText(str) {
     // Function to update the play button
-    playBtn.textContent = "PLAY AGAIN?";
+    let words = playBtn.querySelector('div.text');
+    let letters = str.toUpperCase().split('');
+    console.log(letters);
+    let lettersArr = [];
+    for (let letter of letters){
+            lettersArr.push(`<p>${letter}</p>`);
+    }
+    if (str.length > 5){
+        words.style.fontSize = '2rem';
+    } else {
+        words.style.fontSize = '3rem';
+    }
+    words.innerHTML = lettersArr.join('');
 }
 
 function updateCurrHandTotal() {

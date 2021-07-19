@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap');
+
 * {
     box-sizing: border-box;
 }
@@ -25,7 +27,7 @@
 }
 
 .background-image {
-    background-image: url('https://cdna.artstation.com/p/assets/images/images/017/099/450/large/patricia-kelen-takahashi-patriciakelen-com-10.jpg?1554648614');
+    background-image: url('https://i.imgur.com/8qxhMmf.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
@@ -96,7 +98,6 @@ footer {
     grid-area: ftr;
     display: grid;
     grid-template-columns: 15% 1fr 1fr 1fr 15%;
-
 }
 
 #gameTable {
@@ -145,17 +146,18 @@ footer {
 .holder-location {
     text-align: center;
     color: white;
-    font-size: 2em;
+    font-size: 1.9em;
     margin-top: 20px;
     height: 20%;
     background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.5), transparent);
+    font-family: 'Nothing You Could Do', cursive;
 }
 
 #play {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     grid-column: 1 / 2;
+    width: 100%;
+    height: 70%;
+    place-self: center;
 }
 
 #moves {
@@ -185,7 +187,7 @@ h2 {
     margin: 0;
 }
 
-#play-btn, #stand-btn, #hit-btn {
+#stand-btn, #hit-btn {
     border: none;
     width: 100%;
     height: 100%;
@@ -203,4 +205,5 @@ h2 {
 
 .option-bar {
     background-color: rgba(104, 99, 99, 0.459);
+    height: 100%;
 }
