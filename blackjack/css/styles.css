@@ -116,6 +116,7 @@ footer {
     grid-column: 2 / 3;
     grid-row: 1 / 2;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     font-size: 16px;
@@ -190,7 +191,7 @@ h2 {
     height: 100%;
     border-radius: 50%;
     font-size: 2em;
-    background-color: #171515;
+    background-color: rgba(105, 105, 105, 1);
     color: #fff;
 }
 
@@ -201,6 +202,5 @@ h2 {
 }
 
 .option-bar {
-    background-color: rgba(26, 26, 26, 0.5);
+    background-color: rgba(104, 99, 99, 0.459);
 }
-

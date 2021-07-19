@@ -119,7 +119,7 @@ function startingCards(area, hand, total, holder){
         playersHandTotal = checkAce(hand, total);
         playersHand = hand;
     } else {
-        dealersHandTotal = total;
+        dealersHandTotal = checkAce(hand, total);
         dealersHand = hand;
     }
 
@@ -157,10 +157,12 @@ function handleStand() {
 
 function checkWinner() {
     // Function to check the winner
-
+    // Dealer pulls any cards before the check
+    dealerPulls();
     // Define when player wins
     if (playersHandTotal === 21 || 
-        (playersHandTotal > dealersHandTotal && playersHandTotal < 21)){
+        (playersHandTotal > dealersHandTotal && playersHandTotal < 21) ||
+        dealersHandTotal > 21){
             winner = 'player';
     }
     // Define when dealer wins
@@ -215,9 +217,11 @@ function handleHit() {
 
 function flipDealerCard() {
     // Function to flip the dealer's card over visually
-    let dealerHiddenCard = document.querySelector('#dealer > div:last-child');
-    dealerHiddenCard.classList.add(`${dealersHand[1].face}`)
-    dealerHiddenCard.classList.remove('back-blue')
+    let dealerHiddenCards = document.querySelectorAll('#dealer > div');
+    dealerHiddenCards.forEach(card => {
+        card.classList.add(`${dealersHand[1].face}`)
+        card.classList.remove('back-blue')
+    })
 }
 
 function render(){
@@ -326,6 +330,42 @@ function playAgain() {
 function updateCurrHandTotal() {
     // Function to update the player's hand total in the DOM
     currentHandArea.textContent = playersHandTotal;
+}
+
+function dealerPulls() {
+    if (dealersHandTotal >= 16){
+        return;
+    } 
+    let newCard = document.createElement('div');
+
+    let currentHandLength = dealersHand.length;
+
+    // Add a new card that is not already in play
+    while (dealersHand.length <= currentHandLength) {
+        let card = randomizer(cards);
+        if (!cardsInPlay.includes(card)) {
+            dealersHand.push(card);
+            cardsInPlay.push(card);
+            dealersHandTotal += card.value;
+        }
+    }
+
+    if (dealersHand.length === 5){
+        let childDivs = document.querySelectorAll('#dealer > div');
+        childDivs.forEach(div => {
+            div.classList.add('small');
+        })
+    } 
+    
+    if (dealersHand.length >= 5) {
+        newCard.classList.add('card', 'back-blue', 'small');
+    } else {
+        newCard.classList.add('card', 'back-blue');
+    }
+    
+    dealerArea.appendChild(newCard);
+    dealersHandTotal = checkAce(dealersHand, dealersHandTotal);
+    return;
 }
 
 onLoad();

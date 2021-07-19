@@ -14,18 +14,18 @@
   
   .neon {
     font-family: neon;
-    color: #FB4264;
+    color: #07beb8;
     font-size: 8vw;
     line-height: 8vw;
-    text-shadow: 0 0 3vw #F40A35;
+    text-shadow: 0 0 3vw #098b87;
   }
   
   .flux {
     font-family: neon;
-    color: #426DFB;
+    color: #ea698b;
     font-size: 8vw;
     line-height: 8vw;
-    text-shadow: 0 0 3vw #2356FF;
+    text-shadow: 0 0 3vw #d55d92;
   }
   
   .neon {
@@ -37,12 +37,12 @@
   @keyframes neon {
     0%,
     100% {
-      text-shadow: 0 0 1vw #FA1C16, 0 0 3vw #FA1C16, 0 0 10vw #FA1C16, 0 0 10vw #FA1C16, 0 0 .4vw #FED128, .5vw .5vw .1vw #806914;
-      color: #FED128;
+      text-shadow: 0 0 1vw #29adab, 0 0 3vw #29adab, 0 0 10vw #FA1C16, 0 0 10vw #FA1C16, 0 0 .4vw #FED128, .5vw .5vw .1vw #806914;
+      color: #19ffba;
     }
     50% {
-      text-shadow: 0 0 .5vw #800E0B, 0 0 1.5vw #800E0B, 0 0 5vw #800E0B, 0 0 5vw #800E0B, 0 0 .2vw #800E0B, .5vw .5vw .1vw #40340A;
-      color: #806914;
+      text-shadow: 0 0 .5vw #006466, 0 0 1.5vw #006466, 0 0 5vw #800E0B, 0 0 5vw #800E0B, 0 0 .2vw #800E0B, .5vw .5vw .1vw #40340A;
+      color: #006666;
     }
   }
   
@@ -56,12 +56,12 @@
   @keyframes flux {
     0%,
     100% {
-      text-shadow: 0 0 1vw #1041FF, 0 0 3vw #1041FF, 0 0 10vw #1041FF, 0 0 10vw #1041FF, 0 0 .4vw #8BFDFE, .5vw .5vw .1vw #147280;
-      color: #28D7FE;
+      text-shadow: 0 0 1vw #ac46a1, 0 0 3vw #ac46a1, 0 0 10vw #1041FF, 0 0 10vw #1041FF, 0 0 .4vw #8BFDFE, .5vw .5vw .1vw #147280;
+      color: #ff7ba9;
     }
     50% {
-      text-shadow: 0 0 .5vw #082180, 0 0 1.5vw #082180, 0 0 5vw #082180, 0 0 5vw #082180, 0 0 .2vw #082180, .5vw .5vw .1vw #0A3940;
-      color: #146C80;
+      text-shadow: 0 0 .5vw #571089, 0 0 1.5vw #571089, 0 0 5vw #082180, 0 0 5vw #082180, 0 0 .2vw #082180, .5vw .5vw .1vw #0A3940;
+      color: #c096a2;
     }
   }
 
@@ -124,8 +124,8 @@
   font-size: 10px;   
   
   /* Set neon color */
-  --neon-text-color: #f40;
-  --neon-border-color: #08f;
+  --neon-text-color: #ac1066;
+  --neon-border-color: #0091ad;
 }
 
 #messageArea {
@@ -142,9 +142,9 @@ h2#message {
   font-size: 3rem;
   font-weight: 200;
   font-style: italic;
-  color: #fff;
+  color: #e7cee3;
   padding: 2rem 4rem 3.5rem;
-  border: 0.4rem solid #fff;
+  border: 0.4rem solid #e7cee3;
   border-radius: 2rem;
   text-transform: uppercase;
   animation: flicker-msg 1.5s infinite alternate;
