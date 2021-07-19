@@ -183,35 +183,8 @@ function handleHit() {
     // Function to handle when the hit button is clicked.
     // Add a new card to the player's hand.
     hit = true;
-    let newCard = document.createElement('div');
 
-    let currentHandLength = playersHand.length;
-
-    // Add a new card that is not already in play
-    while (playersHand.length <= currentHandLength) {
-        let card = randomizer(cards);
-        if (!cardsInPlay.includes(card)) {
-            playersHand.push(card);
-            cardsInPlay.push(card);
-            playersHandTotal += card.value;
-        }
-    }
-
-    if (playersHand.length === 5){
-        let childDivs = document.querySelectorAll('#player > div');
-        childDivs.forEach(div => {
-            div.classList.add('small');
-        })
-    } 
-    
-    if (playersHand.length >= 5) {
-        newCard.classList.add('card', `${playersHand[playersHand.length - 1].face}`, 'small');
-    } else {
-        newCard.classList.add('card', `${playersHand[playersHand.length - 1].face}`);
-    }
-    
-    playerArea.appendChild(newCard);
-    playersHandTotal = checkAce(playersHand, playersHandTotal);
+    addNewCard(playersHand, playersHandTotal, playerArea, 'player');
 
     (playersHandTotal >= 21) ? checkWinner() : render();
 }
@@ -219,9 +192,11 @@ function handleHit() {
 function flipDealerCard() {
     // Function to flip the dealer's card over visually
     let dealerHiddenCards = document.querySelectorAll('#dealer > div');
-    dealerHiddenCards.forEach(card => {
-        card.classList.add(`${dealersHand[1].face}`)
-        card.classList.remove('back-blue')
+    dealerHiddenCards.forEach((card, idx) => {
+        if (card.classList.contains('back-blue')) {
+            card.classList.remove('back-blue')
+            card.classList.add(`${dealersHand[idx].face}`)
+        }
     })
 }
 
@@ -346,39 +321,57 @@ function updateCurrHandTotal() {
 }
 
 function dealerPulls() {
+    // Function to add new cards to the dealer's hand
     if (dealersHandTotal >= 16){
         return;
     } 
+    
+    addNewCard(dealersHand, dealersHandTotal, dealerArea,  'dealer');
+}
+
+function addNewCard(hand, total, area,  holder){
+    // Function to add new cards
     let newCard = document.createElement('div');
 
-    let currentHandLength = dealersHand.length;
+    let currentHandLength = hand.length;
 
-    // Add a new card that is not already in play
-    while (dealersHand.length <= currentHandLength) {
+    while (hand.length <= currentHandLength) {
         let card = randomizer(cards);
         if (!cardsInPlay.includes(card)) {
-            dealersHand.push(card);
+            hand.push(card);
+            total += card.value;
             cardsInPlay.push(card);
-            dealersHandTotal += card.value;
         }
     }
 
-    if (dealersHand.length === 5){
-        let childDivs = document.querySelectorAll('#dealer > div');
+    if (hand.length === 5){
+        let childDivs = document.querySelectorAll(`#${holder} > div`);
         childDivs.forEach(div => {
             div.classList.add('small');
         })
     } 
     
-    if (dealersHand.length >= 5) {
-        newCard.classList.add('card', 'back-blue', 'small');
+    if (holder === "player") {
+        if (hand.length >= 5) {
+            newCard.classList.add('card', `${hand[hand.length - 1].face}`, 'small');
+        } else {
+            newCard.classList.add('card', `${hand[hand.length - 1].face}`);
+        }
     } else {
-        newCard.classList.add('card', 'back-blue');
+        if (hand.length >= 5) {
+            newCard.classList.add('card', 'back-blue', 'small');
+        } else {
+            newCard.classList.add('card', 'back-blue');
+        }
     }
     
-    dealerArea.appendChild(newCard);
-    dealersHandTotal = checkAce(dealersHand, dealersHandTotal);
-    return;
+    area.appendChild(newCard);
+    
+    if (holder === "player") {
+        playersHandTotal = checkAce(hand, total);
+    } else {
+        dealersHandTotal = checkAce(hand, total);
+    }
 }
 
 onLoad();
