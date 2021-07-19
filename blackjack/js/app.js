@@ -7,6 +7,12 @@ const winMessages = ['CONGRATULATION! YOU WIN!', 'GREAT JOB! YOU WON!', 'YOU WIN
 const lossMessages = ['YOU LOST! BETTER LUCK NEXT TIME!', "GUESS IT'S NOT YOUR LUCKY DAY! YOU LOST!", 'YOU LOST! TIME TO PAY UP!'];
 const tieMessages = ["NOT A WIN BUT NOT A LOSS, IT'S A TIE", "IT'S A TIE!"];
 
+const ACE_HIGH = 11;
+const ACE_LOW = 1;
+const ACE_DIFF = ACE_HIGH - ACE_LOW;
+
+const TWENTY_ONE = 21;
+
 /*----- app's state (variables) -----*/
 let playersHand = [];
 let dealersHand = [];
@@ -17,7 +23,7 @@ let dealersHandTotal = 0;
 let winner = '';
 let hit = false;
 let cardsInPlay = [];
-let startClickCount = 0;
+let startClickCount = false;
 let resetScore = false;
 
 /*----- cached element references -----*/
@@ -65,14 +71,15 @@ function createDeck(){
     }
 
 function onLoad() {
+    // Function to be called on the intial loading of the JS to the page
     disableMoves();
+    changeMesageLights();
 }
 
 function handleClick(evt) {
     // Function to handle buttons being clicked
     if (evt.target === playBtn) {
         init();
-        // console.log('PLAY')
     } else if (evt.target === standBtn) {
         handleStand();
     } else if (evt.target === hitBtn) {
@@ -81,8 +88,10 @@ function handleClick(evt) {
 }
 
 function init() {
-    startClickCount++;
-    if (startClickCount >= 1){
+    // Function to initialize starting values
+    changeMesageLights();
+    startClick = true;
+    if (startClick){
         playButtonText('reset');
     }
     winner = '';
@@ -143,9 +152,9 @@ function firstTwo(hand) {
 function checkAce(hand, total){
     // Function to return an updated total hand value if an Ace is drawn and the total is over 21
     for (let i = 0; i < hand.length; i++){
-        if (hand[i].face.includes('A') && hand[i].value === 11 && total > 21) {
-            hand[i].value = 1;
-            total -= 10;
+        if (hand[i].face.includes('A') && hand[i].value === ACE_HIGH && total > TWENTY_ONE) {
+            hand[i].value = ACE_LOW;
+            total -= ACE_DIFF;
         }
     }
     return total;
@@ -161,15 +170,15 @@ function checkWinner() {
     // Dealer pulls any cards before the check
     dealerPulls();
     // Define when player wins
-    if (playersHandTotal === 21 || 
-        (playersHandTotal > dealersHandTotal && playersHandTotal < 21) ||
-        dealersHandTotal > 21){
+    if (playersHandTotal === TWENTY_ONE || 
+        (playersHandTotal > dealersHandTotal && playersHandTotal < TWENTY_ONE) ||
+        dealersHandTotal > TWENTY_ONE){
             winner = 'player';
     }
     // Define when dealer wins
-    else if (dealersHandTotal === 21 ||
-        (dealersHandTotal > playersHandTotal && dealersHandTotal < 21) || 
-        playersHandTotal > 21){
+    else if (dealersHandTotal === TWENTY_ONE ||
+        (dealersHandTotal > playersHandTotal && dealersHandTotal < TWENTY_ONE) || 
+        playersHandTotal > TWENTY_ONE){
             winner = 'dealer';
     } 
     // Define when a tie
@@ -186,7 +195,7 @@ function handleHit() {
 
     addNewCard(playersHand, playersHandTotal, playerArea, 'player');
 
-    (playersHandTotal >= 21) ? checkWinner() : render();
+    (playersHandTotal >= TWENTY_ONE) ? checkWinner() : render();
 }
 
 function flipDealerCard() {
@@ -279,16 +288,20 @@ function updateMessage() {
         case 'player':
             outputMessage = randomizer(winMessages);
             message.innerHTML = outputMessage;
+            changeMesageLights("3bceac", "0ead69");
             break;
         case 'dealer':
             outputMessage = randomizer(lossMessages);
             message.innerHTML = outputMessage;
+            changeMesageLights("ff7096", "ff0a54");
             break;
         case 'tie':
             outputMessage = randomizer(tieMessages);
             message.innerHTML = outputMessage;
+            changeMesageLights("00b4d8", "0077b6");
             break;
         default:
+            changeMesageLights("7400b8", "5390d9");
             message.textContent = "MAKE YOUR MOVE BELOW";
     }
 }
@@ -373,6 +386,14 @@ function addNewCard(hand, total, area,  holder){
         dealersHandTotal = checkAce(hand, total);
     }
 }
+
+function changeMesageLights(text = 'ac1066', border = '0091ad') {
+    // Function to change the lights of the message board
+    document.body.style.setProperty('--neon-text-color', `#${text}`);
+    document.body.style.setProperty('--neon-border-color', `#${border}`);
+}
+
+
 
 onLoad();
 createDeck();
