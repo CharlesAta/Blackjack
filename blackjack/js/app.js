@@ -48,6 +48,7 @@ const playerArea = document.querySelector('#player');
 const currentHandArea = document.querySelector('#currentHand > span');
 const dealerCurrentHandArea = document.querySelector('#dealerCurrentHand > span');
 
+const bgPlayer = document.querySelector('#bg-player');
 
 /*----- event listeners -----*/
 options.addEventListener('click', handleClick);
@@ -454,6 +455,9 @@ function resetWinnerGlow() {
 function stackCards(){
 
 }
+
+bgPlayer.volume = .02;
+
 
 onLoad();
 createDeck();
