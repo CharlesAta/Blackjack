@@ -129,6 +129,8 @@ footer {
     justify-content: center;
     align-items: center;
     font-size: 16px;
+    box-shadow: null;
+    border-radius: 40px;
 }
 
 #player {
@@ -139,6 +141,9 @@ footer {
     justify-content: center;
     align-items: center;
     font-size: 16px;
+    position: relative;
+    box-shadow: null;
+    border-radius: 40px;
 }
 
 #d-hand {

@@ -434,7 +434,7 @@ h2#message:focus {
     animation: shake 0.5s ease infinite;
     color: #fca311
 }
-  
+
 .stand-cont #stand-btn:hover:enabled p:nth-child(2n) {
     transform: rotate(5deg);
     animation: shake 0.5s ease-out infinite reverse;

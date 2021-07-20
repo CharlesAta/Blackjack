@@ -13,6 +13,8 @@ const ACE_DIFF = ACE_HIGH - ACE_LOW;
 
 const TWENTY_ONE = 21;
 
+const HAND_DIV_LIMIT = 3;
+
 /*----- app's state (variables) -----*/
 let playersHand = [];
 let dealersHand = [];
@@ -61,7 +63,7 @@ function createDeck(){
                 if (cardTypes[j] === 'J' || cardTypes[j] === 'Q' || cardTypes[j] === 'K') {
                     cardValue = 10;
                 } else if (cardTypes[j] === 'A') {
-                    cardValue = 11;
+                    cardValue = ACE_HIGH;
                 } else {
                     cardValue = parseInt(cardTypes[j]);
                 }
@@ -102,13 +104,18 @@ function init() {
         playButtonText('reset');
     }
     winner = '';
+    cardsInPlay = [];
     startingCards(playerArea, playersHand, playersHandTotal, 'player');
     startingCards(dealerArea, dealersHand, dealersHandTotal, 'dealer');
     
     enableMoves();
     updateCurrHandTotal();
     updateDealerHandTotal();
-    render();
+    if (playersHandTotal === TWENTY_ONE || dealersHandTotal === TWENTY_ONE){
+        checkWinner();
+    } else {
+        render();
+    }
 }
 
 function startingCards(area, hand, total, holder){
@@ -177,8 +184,14 @@ function checkWinner() {
     // Function to check the winner
     // Dealer pulls any cards before the check
     dealerPulls();
+
+    // Define when a tie
+    if (playersHandTotal === dealersHandTotal || playersHandTotal > TWENTY_ONE && dealersHandTotal > TWENTY_ONE){
+        winner = 'tie';
+        addWinnerGlow(winner);
+    }
     // Define when player wins
-    if (playersHandTotal === TWENTY_ONE || 
+    else if (playersHandTotal === TWENTY_ONE || 
         (playersHandTotal > dealersHandTotal && playersHandTotal < TWENTY_ONE) ||
         dealersHandTotal > TWENTY_ONE){
             winner = 'player';
@@ -191,10 +204,7 @@ function checkWinner() {
             winner = 'dealer';
             addWinnerGlow(winner);
     } 
-    // Define when a tie
-    else if (playersHandTotal === dealersHandTotal){
-            winner = 'tie';
-    }
+    
     render();
 }
 
@@ -345,6 +355,7 @@ function updateCurrHandTotal() {
 }
 
 function updateDealerHandTotal() {
+    // Function to update the dealer's hand total in the DOM
     if (flip) {
         dealerCurrentHandArea.textContent = dealersHandTotal;
     } else {
@@ -356,9 +367,11 @@ function dealerPulls() {
     // Function to add new cards to the dealer's hand
     if (dealersHandTotal >= 16){
         return;
-    } 
+    }
     
-    addNewCard(dealersHand, dealersHandTotal, dealerArea,  'dealer');
+    while (dealersHandTotal < 16) {
+        addNewCard(dealersHand, dealersHandTotal, dealerArea,  'dealer');
+    }
 }
 
 function addNewCard(hand, total, area,  holder){
@@ -376,7 +389,7 @@ function addNewCard(hand, total, area,  holder){
         }
     }
 
-    if (hand.length === 5){
+    if (hand.length === HAND_DIV_LIMIT){
         let childDivs = document.querySelectorAll(`#${holder} > div`);
         childDivs.forEach(div => {
             div.classList.add('small');
@@ -384,13 +397,13 @@ function addNewCard(hand, total, area,  holder){
     } 
     
     if (holder === "player") {
-        if (hand.length >= 5) {
+        if (hand.length >= HAND_DIV_LIMIT) {
             newCard.classList.add('card', `${hand[hand.length - 1].face}`, 'small');
         } else {
             newCard.classList.add('card', `${hand[hand.length - 1].face}`);
         }
     } else {
-        if (hand.length >= 5) {
+        if (hand.length >= HAND_DIV_LIMIT) {
             newCard.classList.add('card', 'back-blue', 'small');
         } else {
             newCard.classList.add('card', 'back-blue');
@@ -415,25 +428,31 @@ function changeMesageLights(text = 'ac1066', border = '0091ad') {
 function addWinnerGlow(winner) {
     // Function to add glow to the winning area
     if (winner === 'player'){
-        playerArea.style.boxShadow = '0 0 100px #ffb700 inset, 0 0 20px #ffb700';
-        playerArea.style.borderRadius = '40px';
+        if (playersHandTotal === TWENTY_ONE) {
+            playerArea.style.boxShadow = '0 0 100px #ffb700 inset, 0 0 20px #ffb700';
+        } else {
+            playerArea.style.boxShadow = '0 0 100px #fff inset, 0 0 20px #fff';
+        }
     } else if (winner === 'dealer') {
-        dealerArea.style.boxShadow = '0 0 100px #ffb700 inset, 0 0 20px #ffb700';
-        dealerArea.style.borderRadius = '40px';
+        if (dealersHandTotal === TWENTY_ONE) {
+            dealerArea.style.boxShadow = '0 0 100px #ffb700 inset, 0 0 20px #ffb700';
+        } else {
+            dealerArea.style.boxShadow = '0 0 100px #fff inset, 0 0 20px #fff';
+        }
     } else {
-        playerArea.style.boxShadow = '0 0 100px #ffb700 inset, 0 0 20px #ffb700';
-        playerArea.style.borderRadius = '40px';
-        dealerArea.style.boxShadow = '0 0 100px #ffb700 inset, 0 0 20px #ffb700';
-        dealerArea.style.borderRadius = '40px';
+        playerArea.style.boxShadow = '0 0 100px #fff inset, 0 0 20px #fff';
+        dealerArea.style.boxShadow = '0 0 100px #fff inset, 0 0 20px #fff';
     }
 }
 
 function resetWinnerGlow() {
     // Function to reset the area glow
     playerArea.style.boxShadow = null;
-    playerArea.style.borderRadius = null;
     dealerArea.style.boxShadow = null;
-    dealerArea.style.borderRadius = null;
+}
+
+function stackCards(){
+
 }
 
 onLoad();
