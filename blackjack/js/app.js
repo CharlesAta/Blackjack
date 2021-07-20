@@ -90,6 +90,8 @@ function handleClick(evt) {
 function init() {
     // Function to initialize starting values
     changeMesageLights();
+    resetWinnerGlow();
+
     startClick = true;
     if (startClick){
         playButtonText('reset');
@@ -174,12 +176,14 @@ function checkWinner() {
         (playersHandTotal > dealersHandTotal && playersHandTotal < TWENTY_ONE) ||
         dealersHandTotal > TWENTY_ONE){
             winner = 'player';
+            addWinnerGlow(winner);
     }
     // Define when dealer wins
     else if (dealersHandTotal === TWENTY_ONE ||
         (dealersHandTotal > playersHandTotal && dealersHandTotal < TWENTY_ONE) || 
         playersHandTotal > TWENTY_ONE){
             winner = 'dealer';
+            addWinnerGlow(winner);
     } 
     // Define when a tie
     else if (playersHandTotal === dealersHandTotal){
@@ -315,7 +319,6 @@ function playButtonText(str) {
     // Function to update the play button
     let words = playBtn.querySelector('div.text');
     let letters = str.toUpperCase().split('');
-    console.log(letters);
     let lettersArr = [];
     for (let letter of letters){
             lettersArr.push(`<p>${letter}</p>`);
@@ -393,7 +396,23 @@ function changeMesageLights(text = 'ac1066', border = '0091ad') {
     document.body.style.setProperty('--neon-border-color', `#${border}`);
 }
 
+function addWinnerGlow(winner) {
+    // Function to add glow to the winning area
+    if (winner === 'player'){
+        playerArea.style.boxShadow = '0 0 100px #ffb700 inset, 0 0 20px #ffb700';
+    } else if (winner === 'dealer') {
+        dealerArea.style.boxShadow = '0 0 100px #ffb700 inset, 0 0 20px #ffb700';
+    } else {
+        playerArea.style.boxShadow = '0 0 100px #ffb700 inset, 0 0 20px #ffb700';
+        dealerArea.style.boxShadow = '0 0 100px #ffb700 inset, 0 0 20px #ffb700';
+    }
+}
 
+function resetWinnerGlow() {
+    // Function to reset the area glow
+    playerArea.style.boxShadow = null;
+    dealerArea.style.boxShadow = null;
+}
 
 onLoad();
 createDeck();
