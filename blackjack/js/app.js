@@ -15,6 +15,18 @@ const TWENTY_ONE = 21;
 
 const HAND_DIV_LIMIT = 3;
 
+const sounds = {
+    playSound: './css/sounds/playSound.mp3',
+    standSound: './css/sounds/standSound.mp3',
+    refreshSound: './css/sounds/refreshSound.mp3',
+    winSound: './css/sounds/winSound.mp3',
+    lossSound: './css/sounds/lossSound.mp3',
+    dealSound: './css/sounds/dealSound.mp3',
+    drawSound: './css/sounds/drawSound.mp3',
+    flipSound: './css/sounds/flipSound.mp3',
+    disabledSound: './css/sounds/disabledSound.mp3'
+}
+
 /*----- app's state (variables) -----*/
 let playersHand = [];
 let dealersHand = [];
