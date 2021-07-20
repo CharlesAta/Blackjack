@@ -25,6 +25,7 @@ let hit = false;
 let cardsInPlay = [];
 let startClickCount = false;
 let resetScore = false;
+let flip = false;
 
 /*----- cached element references -----*/
 const playBtn = document.querySelector('#play-btn');
@@ -43,6 +44,8 @@ const dealerArea = document.querySelector('#dealer');
 const playerArea = document.querySelector('#player');
 
 const currentHandArea = document.querySelector('#currentHand > span');
+const dealerCurrentHandArea = document.querySelector('#dealerCurrentHand > span');
+
 
 /*----- event listeners -----*/
 options.addEventListener('click', handleClick);
@@ -92,6 +95,8 @@ function init() {
     changeMesageLights();
     resetWinnerGlow();
 
+    flip = false;
+    
     startClick = true;
     if (startClick){
         playButtonText('reset');
@@ -102,6 +107,7 @@ function init() {
     
     enableMoves();
     updateCurrHandTotal();
+    updateDealerHandTotal();
     render();
 }
 
@@ -204,6 +210,7 @@ function handleHit() {
 
 function flipDealerCard() {
     // Function to flip the dealer's card over visually
+    flip = true;
     let dealerHiddenCards = document.querySelectorAll('#dealer > div');
     dealerHiddenCards.forEach((card, idx) => {
         if (card.classList.contains('back-blue')) {
@@ -224,6 +231,7 @@ function render(){
     // If a winner exists
     if (winner) {
         flipDealerCard();
+        updateDealerHandTotal();
         disableMoves();
         updateScoreboard();
         playButtonText('play again?');
@@ -336,6 +344,14 @@ function updateCurrHandTotal() {
     currentHandArea.textContent = playersHandTotal;
 }
 
+function updateDealerHandTotal() {
+    if (flip) {
+        dealerCurrentHandArea.textContent = dealersHandTotal;
+    } else {
+        dealerCurrentHandArea.textContent = dealersHand[0].value;
+    }
+}
+
 function dealerPulls() {
     // Function to add new cards to the dealer's hand
     if (dealersHandTotal >= 16){
@@ -400,18 +416,24 @@ function addWinnerGlow(winner) {
     // Function to add glow to the winning area
     if (winner === 'player'){
         playerArea.style.boxShadow = '0 0 100px #ffb700 inset, 0 0 20px #ffb700';
+        playerArea.style.borderRadius = '40px';
     } else if (winner === 'dealer') {
         dealerArea.style.boxShadow = '0 0 100px #ffb700 inset, 0 0 20px #ffb700';
+        dealerArea.style.borderRadius = '40px';
     } else {
         playerArea.style.boxShadow = '0 0 100px #ffb700 inset, 0 0 20px #ffb700';
+        playerArea.style.borderRadius = '40px';
         dealerArea.style.boxShadow = '0 0 100px #ffb700 inset, 0 0 20px #ffb700';
+        dealerArea.style.borderRadius = '40px';
     }
 }
 
 function resetWinnerGlow() {
     // Function to reset the area glow
     playerArea.style.boxShadow = null;
+    playerArea.style.borderRadius = null;
     dealerArea.style.boxShadow = null;
+    dealerArea.style.borderRadius = null;
 }
 
 onLoad();

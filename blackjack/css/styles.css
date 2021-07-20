@@ -6,19 +6,19 @@
 
 #mainContainer {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(9, 1fr);
     grid-template-rows: 1fr 5% repeat(8, 1fr);
     grid-template-areas: 
-    'ttl ttl ttl ttl ttl ttl ttl'
-    '. scr scr scr scr scr .'
-    'msg msg msg msg msg msg msg'
-    '. brd brd brd brd brd .'
-    '. brd brd brd brd brd .'
-    '. brd brd brd brd brd .'
-    '. brd brd brd brd brd .'
-    '. brd brd brd brd brd .'
-    '. brd brd brd brd brd .'
-    'ftr ftr ftr ftr ftr ftr ftr';
+    'ttl ttl ttl ttl ttl ttl ttl ttl ttl'
+    '. . scr scr scr scr scr . .'
+    'msg msg msg msg msg msg msg msg msg'
+    '. . brd brd brd brd brd dlr dlr'
+    '. . brd brd brd brd brd . .'
+    '. . brd brd brd brd brd . bet'
+    '. . brd brd brd brd brd . bet'
+    '. . brd brd brd brd brd . bet'
+    '. . brd brd brd brd brd . .'
+    'ftr ftr ftr ftr ftr ftr ftr ftr ftr';
     height: 100vh;
     width: 100vh;
     min-width: 1000px;
@@ -100,6 +100,15 @@ footer {
     grid-template-columns: 15% 1fr 30% 1fr 15%;
 }
 
+#dealerCurrentHand {
+    grid-area: dlr;
+    justify-content: space-between;
+    align-items: center;
+    width: 75%;
+    align-content: flex-end;
+    justify-self: end;
+}
+
 #gameTable {
     border-radius: 50%;
     height: 100%;
@@ -169,18 +178,15 @@ footer {
 }
 
 #currentHand {
-    display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     grid-column: 5 / 6;
-    font-size: 1.5em;
-    height: 100%;
-    padding: 0;
-    margin: 0;
+    align-self: end;
+    height: 90%;
 }
 
-#currentHand > span {
+.hand {
     font-size: 3em;
 }
 
@@ -194,7 +200,13 @@ h2 {
     border-radius: 50%;
 }
 
-.option-bar {
+.hand-style {
     background-color: rgba(104, 99, 99, 0.459);
     height: 100%;
+    font-size: 1.5em;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
 }
