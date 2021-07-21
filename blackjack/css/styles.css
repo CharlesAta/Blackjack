@@ -81,7 +81,7 @@ section#scoreboard {
     background-size: cover;
 }
 
-section#messageArea {
+#messageArea {
     grid-area: msg;
 }
 
