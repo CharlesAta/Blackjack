@@ -13,18 +13,17 @@ const ACE_DIFF = ACE_HIGH - ACE_LOW;
 
 const TWENTY_ONE = 21;
 
-const HAND_DIV_LIMIT = 3;
+const HAND_DIV_MIN_LIMIT = 3;
+const HAND_DIV_MAX_LIMIT = 4;
 
 const sounds = {
     playSound: './css/sounds/playSound.mp3',
-    standSound: './css/sounds/standSound.mp3',
     refreshSound: './css/sounds/refreshSound.mp3',
     winSound: './css/sounds/winSound.mp3',
     lossSound: './css/sounds/lossSound.mp3',
     dealSound: './css/sounds/dealSound.mp3',
     drawSound: './css/sounds/drawSound.mp3',
-    flipSound: './css/sounds/flipSound.mp3',
-    disabledSound: './css/sounds/disabledSound.mp3'
+    tieSound: './css/sounds/tieSound.mp3'
 }
 
 /*----- app's state (variables) -----*/
@@ -60,6 +59,7 @@ const playerArea = document.querySelector('#player');
 const currentHandArea = document.querySelector('#currentHand > span');
 const dealerCurrentHandArea = document.querySelector('#dealerCurrentHand > span');
 
+const player = new Audio();
 const bgPlayer = document.querySelector('#bg-player');
 
 /*----- event listeners -----*/
@@ -97,11 +97,14 @@ function onLoad() {
 function handleClick(evt) {
     // Function to handle buttons being clicked
     if (evt.target === playBtn) {
-        init();
+        playSound('playSound');
+        setTimeout(init, 600);
     } else if (evt.target === standBtn) {
-        handleStand();
+        playSound('standSound');
+        setTimeout(handleStand, 500);
     } else if (evt.target === hitBtn) {
-        handleHit();
+        playSound('drawSound');
+        setTimeout(handleHit, 200);
     }
 }
 
@@ -118,6 +121,7 @@ function init() {
     }
     winner = '';
     cardsInPlay = [];
+    playSound('dealSound');
     startingCards(playerArea, playersHand, playersHandTotal, 'player');
     startingCards(dealerArea, dealersHand, dealersHandTotal, 'dealer');
     
@@ -143,13 +147,14 @@ function startingCards(area, hand, total, holder){
     firstTwo(hand);
 
     // Create card templates
-    card1.classList.add('card', `${hand[0].face}`);
-    total += hand[0].value;
     if (holder == 'player') {
-        card2.classList.add('card', `${hand[1].face}`);
+        card1.classList.add('card', 'large', `${hand[0].face}`);
+        card2.classList.add('card', 'large', `${hand[1].face}`);
     } else {
+        card1.classList.add('card', `${hand[0].face}`);
         card2.classList.add('card', 'back-blue');
     }
+    total += hand[0].value;
     total += hand[1].value;
 
     // Update global hand total variables
@@ -201,6 +206,7 @@ function checkWinner() {
     // Define when a tie
     if (playersHandTotal === dealersHandTotal || playersHandTotal > TWENTY_ONE && dealersHandTotal > TWENTY_ONE){
         winner = 'tie';
+        playSound('tieSound');
         addWinnerGlow(winner);
     }
     // Define when player wins
@@ -208,6 +214,7 @@ function checkWinner() {
         (playersHandTotal > dealersHandTotal && playersHandTotal < TWENTY_ONE) ||
         dealersHandTotal > TWENTY_ONE){
             winner = 'player';
+            playSound('winSound');
             addWinnerGlow(winner);
     }
     // Define when dealer wins
@@ -215,6 +222,7 @@ function checkWinner() {
         (dealersHandTotal > playersHandTotal && dealersHandTotal < TWENTY_ONE) || 
         playersHandTotal > TWENTY_ONE){
             winner = 'dealer';
+            playSound('lossSound');
             addWinnerGlow(winner);
     } 
     
@@ -311,6 +319,7 @@ function resetScoreboard(evt) {
     // Function to handle a click event to reset the scoreboard 
     resetScore = true;
     if (evt.target === resetScoreBtn) {
+        playSound('refreshSound')
         wltScore = [0, 0, 0];
     }
 
@@ -401,22 +410,27 @@ function addNewCard(hand, total, area,  holder){
             cardsInPlay.push(card);
         }
     }
-
-    if (hand.length === HAND_DIV_LIMIT){
-        let childDivs = document.querySelectorAll(`#${holder} > div`);
-        childDivs.forEach(div => {
-            div.classList.add('small');
-        })
-    } 
     
     if (holder === "player") {
-        if (hand.length >= HAND_DIV_LIMIT) {
-            newCard.classList.add('card', `${hand[hand.length - 1].face}`, 'small');
-        } else {
+        let childDivs = document.querySelectorAll(`#${holder} > div`);
+        if (hand.length === HAND_DIV_MIN_LIMIT){
+            childDivs.forEach(div => {
+                div.classList.remove('large');
+            })
+        } 
+        else if (hand.length > HAND_DIV_MIN_LIMIT && hand.length < HAND_DIV_MAX_LIMIT) {
             newCard.classList.add('card', `${hand[hand.length - 1].face}`);
+        } else if (hand.length > HAND_DIV_MAX_LIMIT) {
+            newCard.classList.add('card', `${hand[hand.length - 1].face}`, 'small');
         }
     } else {
-        if (hand.length >= HAND_DIV_LIMIT) {
+        let childDivs = document.querySelectorAll(`#${holder} > div`);
+        if (hand.length === HAND_DIV_MIN_LIMIT){
+            childDivs.forEach(div => {
+                div.classList.add('small');
+            })
+        } 
+        else if (hand.length >= HAND_DIV_MIN_LIMIT) {
             newCard.classList.add('card', 'back-blue', 'small');
         } else {
             newCard.classList.add('card', 'back-blue');
@@ -464,12 +478,13 @@ function resetWinnerGlow() {
     dealerArea.style.boxShadow = null;
 }
 
-function stackCards(){
-
+function playSound(name) {
+    player.src = sounds[name];
+    player.play();
 }
 
 bgPlayer.volume = .02;
-
+player.volume = .03;
 
 onLoad();
 createDeck();
