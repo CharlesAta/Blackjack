@@ -13,10 +13,10 @@
     '. . scr scr scr scr scr . .'
     'msg msg msg msg msg msg msg msg msg'
     '. . brd brd brd brd brd dlr dlr'
-    '. . brd brd brd brd brd . .'
-    '. . brd brd brd brd brd . bet'
-    '. . brd brd brd brd brd . bet'
-    '. . brd brd brd brd brd . bet'
+    'bet . brd brd brd brd brd . .'
+    'bet . brd brd brd brd brd . .'
+    'bet . brd brd brd brd brd . .'
+    'bet . brd brd brd brd brd . .'
     '. . brd brd brd brd brd . .'
     'ftr ftr ftr ftr ftr ftr ftr ftr ftr';
     height: 100vh;
@@ -128,7 +128,7 @@ footer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    align-content: center;
     font-size: 16px;
     box-shadow: null;
     border-radius: 40px;
@@ -140,7 +140,7 @@ footer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: flex-start;
+    align-content: flex-start;
     font-size: 16px;
     position: relative;
     box-shadow: null;

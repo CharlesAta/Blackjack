@@ -128,7 +128,8 @@ function init() {
     enableMoves();
     updateCurrHandTotal();
     updateDealerHandTotal();
-    if (playersHandTotal === TWENTY_ONE || dealersHandTotal === TWENTY_ONE){
+
+    if (playersHandTotal === TWENTY_ONE){
         checkWinner();
     } else {
         render();
@@ -138,8 +139,8 @@ function init() {
 function startingCards(area, hand, total, holder){
     // Initialize the starting hand
     area.innerHTML = '';
-    let card1 = document.createElement('div');
-    let card2 = document.createElement('div');
+    let firstCard = document.createElement('div');
+    let secondCard = document.createElement('div');
 
     hand = [];
     total = 0;
@@ -148,11 +149,11 @@ function startingCards(area, hand, total, holder){
 
     // Create card templates
     if (holder == 'player') {
-        card1.classList.add('card', 'large', `${hand[0].face}`);
-        card2.classList.add('card', 'large', `${hand[1].face}`);
+        firstCard.classList.add('card', 'large', `${hand[0].face}`);
+        secondCard.classList.add('card', 'large', `${hand[1].face}`);
     } else {
-        card1.classList.add('card', `${hand[0].face}`);
-        card2.classList.add('card', 'back-blue');
+        firstCard.classList.add('card', `${hand[0].face}`);
+        secondCard.classList.add('card', 'back-blue');
     }
     total += hand[0].value;
     total += hand[1].value;
@@ -161,14 +162,16 @@ function startingCards(area, hand, total, holder){
     if (holder == 'player') {
         playersHandTotal = checkAce(hand, total);
         playersHand = hand;
+        area.style.alignContent = 'center';
     } else {
         dealersHandTotal = checkAce(hand, total);
         dealersHand = hand;
     }
 
+
     // Add cards to HTML
-    area.appendChild(card1);
-    area.appendChild(card2);
+    area.appendChild(firstCard);
+    area.appendChild(secondCard);
 }
 
 function firstTwo(hand) {
@@ -214,6 +217,7 @@ function checkWinner() {
         (playersHandTotal > dealersHandTotal && playersHandTotal < TWENTY_ONE) ||
         dealersHandTotal > TWENTY_ONE){
             winner = 'player';
+            playerArea.style.alignContent = 'center';
             playSound('winSound');
             addWinnerGlow(winner);
     }
@@ -413,14 +417,19 @@ function addNewCard(hand, total, area,  holder){
     
     if (holder === "player") {
         let childDivs = document.querySelectorAll(`#${holder} > div`);
+        area.style.alignContent = 'flex-start';
         if (hand.length === HAND_DIV_MIN_LIMIT){
             childDivs.forEach(div => {
                 div.classList.remove('large');
             })
-        } 
-        else if (hand.length > HAND_DIV_MIN_LIMIT && hand.length < HAND_DIV_MAX_LIMIT) {
+        } else if (hand.length === HAND_DIV_MAX_LIMIT) {
+            childDivs.forEach(div => {
+                div.classList.add('small');
+            })
+        }
+        if (hand.length < HAND_DIV_MAX_LIMIT) {
             newCard.classList.add('card', `${hand[hand.length - 1].face}`);
-        } else if (hand.length > HAND_DIV_MAX_LIMIT) {
+        } else if (hand.length >= HAND_DIV_MAX_LIMIT) {
             newCard.classList.add('card', `${hand[hand.length - 1].face}`, 'small');
         }
     } else {
@@ -430,7 +439,7 @@ function addNewCard(hand, total, area,  holder){
                 div.classList.add('small');
             })
         } 
-        else if (hand.length >= HAND_DIV_MIN_LIMIT) {
+        if (hand.length >= HAND_DIV_MIN_LIMIT) {
             newCard.classList.add('card', 'back-blue', 'small');
         } else {
             newCard.classList.add('card', 'back-blue');
