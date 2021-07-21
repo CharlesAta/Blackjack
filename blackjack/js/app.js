@@ -51,6 +51,7 @@ let flip = false;
 let inPlay = false;
 let madeBet = false;
 let resetBet = false;
+let doubleBet = false;
 
 let wallet = 0;
 let bet = 0;
@@ -123,6 +124,7 @@ function createDeck(){
 function onLoad() {
     // Function to be called on the intial loading of the JS to the page
     disableMoves();
+    disableDouble();
     changeMesageLights();
     startingWallet();
 }
@@ -134,6 +136,7 @@ function handleClick(evt) {
         setTimeout(init, 600);
     } else if (evt.target === standBtn) {
         playSound('standSound');
+        disableMoves();
         setTimeout(handleStand, 500);
     } else if (evt.target === hitBtn) {
         playSound('drawSound');
@@ -157,6 +160,7 @@ function init() {
 
     if (inPlay && bet > 0){
         disablePlay();
+        enableDouble();
     }
 
     if (startClick){
@@ -275,7 +279,10 @@ function checkWinner() {
         updateWinnings();
         updateEarnings();
         enablePlay();
+        disableDouble();
+        resetDoubleWindow();
         inPlay = false;
+        doubleBet = false;
     }
     
     render();
@@ -310,10 +317,14 @@ function render(){
         updateBet();
         return;
     }
-    
+
     if (hit) {
         hit = false;
         updateCurrHandTotal();
+    }
+
+    if (doubleBet) {
+        updateBet();
     }
 
     // If a winner exists
@@ -566,6 +577,8 @@ function handleBet(evt) {
         addBet(ONE_THOUSAND);
     } else if (evt.target === betResetButton) {
         clearBet();
+    } else if (evt.target === doubleButton) {
+        activateDouble();
     }
 }
 
@@ -628,7 +641,7 @@ function unlockBetWindow() {
 function updateEarnings() {
     // Function to update the earnings
     earnings = bet;
-    if (winner === 'tie' || winner === '') {
+    if (winner === 'tie' || winner === '' || earnings === 0) {
         earningsAmount.style.color = 'white';
         earningsAmount.textContent = `$0`;
     } else if (winner === 'player') {
@@ -703,4 +716,27 @@ function disableDouble() {
 
 function enableDouble() {
     doubleButton.disabled = false;
+}
+
+function setDoubleWindow() {
+    unlockBetWindow();
+    document.querySelector('#bet-amount').style.boxShadow = '0 0 20px #f77f00 inset';
+
+}
+
+function resetDoubleWindow() {
+    document.querySelector('#bet-amount').style.boxShadow = '0 0 20px #000 inset';
+}
+
+function activateDouble() {
+    let currentBet = bet
+    if (wallet - currentBet >= 0){
+        doubleBet = true;
+        setDoubleWindow();
+        bet += currentBet;
+        wallet -= currentBet;
+        updateWallet();
+        disableDouble();
+        render();
+    }
 }
