@@ -56,8 +56,8 @@ const resetScoreBtn = document.querySelector('#reset-btn');
 const dealerArea = document.querySelector('#dealer');
 const playerArea = document.querySelector('#player');
 
-const currentHandArea = document.querySelector('#currentHand > span');
-const dealerCurrentHandArea = document.querySelector('#dealerCurrentHand > span');
+const currentHandArea = document.querySelector('#current-hand > span');
+const dealerCurrentHandArea = document.querySelector('#dealer-current-hand > span');
 
 const player = new Audio();
 const bgPlayer = document.querySelector('#bg-player');
@@ -209,6 +209,7 @@ function checkWinner() {
     // Define when a tie
     if (playersHandTotal === dealersHandTotal || playersHandTotal > TWENTY_ONE && dealersHandTotal > TWENTY_ONE){
         winner = 'tie';
+        playerArea.style.alignContent = 'center';
         playSound('tieSound');
         addWinnerGlow(winner);
     }

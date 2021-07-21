@@ -4,7 +4,11 @@
     box-sizing: border-box;
 }
 
-#mainContainer {
+h2 {
+    margin: 0;
+}
+
+#main-container {
     display: grid;
     grid-template-columns: repeat(9, 1fr);
     grid-template-rows: 1fr 5% repeat(8, 1fr);
@@ -12,11 +16,11 @@
     'ttl ttl ttl ttl ttl ttl ttl ttl ttl'
     '. . scr scr scr scr scr . .'
     'msg msg msg msg msg msg msg msg msg'
-    '. . brd brd brd brd brd dlr dlr'
-    'bet . brd brd brd brd brd . .'
-    'bet . brd brd brd brd brd . .'
-    'bet . brd brd brd brd brd . .'
-    'bet . brd brd brd brd brd . .'
+    'bet bet brd brd brd brd brd dlr dlr'
+    'bet bet brd brd brd brd brd . .'
+    'bet bet brd brd brd brd brd . .'
+    'bet bet brd brd brd brd brd . .'
+    'bet bet brd brd brd brd brd . .'
     '. . brd brd brd brd brd . .'
     'ftr ftr ftr ftr ftr ftr ftr ftr ftr';
     height: 100vh;
@@ -27,7 +31,7 @@
 }
 
 .background-image {
-    background-image: url('https://cdna.artstation.com/p/assets/images/images/017/099/450/medium/patricia-kelen-takahashi-patriciakelen-com-10.jpg?1554648614');
+    background-image: url('https://i.imgur.com/8qxhMmf.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
@@ -47,7 +51,8 @@
     width: 100%;
 }
 
-section#scoreboard {
+/* vvv SCOREBOARD STYLING vvv */
+#scoreboard {
     grid-area: scr;
     background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(85, 19, 19, 0.7));
     display: flex;
@@ -62,7 +67,7 @@ section#scoreboard {
     text-align: center;
 }
 
-.scoreNum {
+.score-num {
     font-size: 1.5em;
     font-weight: 900;
 }
@@ -79,12 +84,82 @@ section#scoreboard {
     background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Refresh_icon.svg/1200px-Refresh_icon.svg.png");
     background-repeat: no-repeat;
     background-size: cover;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
 }
+/* ^^^ SCOREBOARD STYLING ^^^ */
 
-#messageArea {
+/* vvv MESSAGE AREA STYLING vvv */
+#message-area {
     grid-area: msg;
 }
+/* ^^^ MESSAGE AREA STYLING ^^^ */
 
+/* vvv BETTING AREA STYLING vvv */
+#betting-area {
+    grid-area: bet;
+    background-color: rgba(83, 83, 95, 0.781);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    justify-self: left;
+    text-align: center;
+    width: 50%;
+}
+
+.wallet-ttl {
+    font-size: 2em;
+}
+
+.betting-div {
+    width: 90%;
+}
+
+.money {
+    margin-top: 10%;
+    background: rgba(83, 83, 95, 0.781);
+    color: #fff;
+    font-size: 2em;
+    border-radius: 45px;
+    box-shadow: 0 0 20px #000 inset;
+    width: 100%;
+}
+
+.poker-chips {
+    border-radius: 100%;
+    margin: 2px 2px;
+    border: dotted #fff;
+    font-size: 1em;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    width: 40%;
+    height: 40%;
+}
+
+#bet-btns {
+    margin: 20% auto;
+}
+
+#bet-100 {
+    background-color: black;
+    padding: 10px 1px;
+}
+
+#bet-500 {
+    background-color: rgb(235, 164, 176);
+    padding: 10px 1px;
+}
+
+#bet-1000 {
+    background-color: goldenrod;
+    padding: 10px 1px;
+}
+/* ^^^ BETTING AREA STYLING ^^^ */
+
+/* vvv MAIN AREA STYLING vvv */
 main {
     grid-area: brd;
     background-image: radial-gradient(
@@ -95,22 +170,7 @@ main {
     border-radius: 30px;
 }
 
-footer {
-    grid-area: ftr;
-    display: grid;
-    grid-template-columns: 15% 1fr 30% 1fr 15%;
-}
-
-#dealerCurrentHand {
-    grid-area: dlr;
-    justify-content: space-between;
-    align-items: center;
-    width: 75%;
-    align-content: flex-end;
-    justify-self: end;
-}
-
-#gameTable {
+#game-table {
     border-radius: 50%;
     height: 100%;
     background-image: url("https://www.playsmart.ca/wp-content/uploads/2020/04/breaking-down-the-table.png");
@@ -160,11 +220,18 @@ footer {
 .holder-location {
     text-align: center;
     color: white;
-    font-size: 1.9em;
+    font-size: 1.8em;
     margin-top: 20px;
     height: 20%;
     background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.5), transparent);
-    font-family: 'Nothing You Could Do', cursive;
+}
+/* ^^^ MAIN AREA STYLING ^^^ */
+
+/* vvv FOOTER AREA STYLING & HAND TOTAL STYLING vvv */
+footer {
+    grid-area: ftr;
+    display: grid;
+    grid-template-columns: 15% 1fr 30% 1fr 15%;
 }
 
 #play {
@@ -183,27 +250,27 @@ footer {
     height: 75%;
 }
 
-#currentHand {
+#dealer-current-hand {
+    grid-area: dlr;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    align-content: flex-end;
+    justify-self: end;
+}
+
+#current-hand {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     grid-column: 5 / 6;
     align-self: end;
-    height: 90%;
+    height: 85%;
+    padding-bottom: 5%;
 }
 
 .hand {
     font-size: 3em;
-}
-
-h2 {
-    margin: 0;
-}
-
-#reset-btn {
-    border: none;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 50%;
 }
 
 .hand-style {
@@ -217,6 +284,9 @@ h2 {
     flex-direction: column;
 }
 
+/* ^^^ FOOTER AREA STYLING & HAND TOTAL STYLING ^^^ */
+
 #bg-player {
     width: 50px;
 }
+

@@ -68,6 +68,26 @@
 /* ^^^^^^^^^ CSS for Neon title. Source: https://codepen.io/Trinca/pen/NAvpWa */
 
 /* vvvvvvvvvv CSS for scoreboard styling. Source: https://codepen.io/erikjung/pen/XdWEKE*/
+
+.w-sign {
+    --interval: 10s;
+    display: block;
+    text-shadow: 
+      0 0 10px var(--color1),
+      0 0 20px var(--color2),
+      0 0 40px var(--color3),
+      0 0 80px var(--color4);
+    will-change: filter, color;
+    filter: saturate(60%);
+    animation: flicker steps(100) var(--interval) 1s infinite;
+    color: lightyellow;
+  --color1: yellow;
+  --color2: orange;
+  --color3: brown;
+  --color4: purple;
+  font-family: 'Bad Script', cursive;
+}
+
 .x-sign {
     --interval: 1s;
     display: block;
@@ -84,7 +104,7 @@
     --color2: orangered;
     --color3: mediumblue;
     --color4: purple;
-    font-family: Gruppo;
+    font-family: 'Gruppo', cursive;
 }
 
 .y-sign {
@@ -103,8 +123,27 @@
     --color2: firebrick;
     --color3: maroon;
     --color4: darkred;
-    font-family: Yellowtail;
+    font-family: 'Yellowtail', cursive;
 }
+
+.z-sign {
+    --interval: 1s;
+    display: block;
+    text-shadow: 
+      0 0 10px var(--color1),
+      0 0 20px var(--color2),
+      0 0 40px var(--color3),
+      0 0 80px var(--color4);
+    will-change: filter, color;
+    filter: saturate(60%);
+    animation: flicker steps(100) var(--interval) 1s infinite;
+    color: azure;
+    --color1: azure;
+    --color2: aqua;
+    --color3: dodgerblue;
+    --color4: blue;
+    font-family: 'Sriracha', cursive;
+  }
 
 @keyframes flicker {
     50% {
@@ -117,8 +156,6 @@
 
 /* vvvvvvvvvvv CSS for message board styling. Source: https://codepen.io/GeorgePark/pen/MrjbEr */
 
-@import url(https://fonts.googleapis.com/css?family=Exo+2:200i);
-
 :root {
     /* Base font size */
     font-size: 10px;   
@@ -128,7 +165,7 @@
     --neon-border-color: #0091ad;
 }
 
-#messageArea {
+#message-area {
     font-family: 'Exo 2', sans-serif;
     display: flex;
     justify-content: center;
@@ -240,8 +277,6 @@ h2#message:focus {
 
 /* VVVVVVVV CSS styling for the play, hit, stand buttons. Source: https://codepen.io/balazs-d/pen/OJRPZKz */
 
- @import url('https://fonts.googleapis.com/css2?family=Anton&family=Montserrat&display=swap');
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -288,10 +323,6 @@ h2#message:focus {
 
 #play-btn.button {
     background-color: #F75780;
-}
-
-#stand-btn.button, #hit-btn.button {
-    background-color: #003566;
 }
 
 .button:active {
@@ -392,7 +423,7 @@ h2#message:focus {
 .text {
     display: flex;
     position: absolute;
-    top: 20%;
+    top: 0;
     font-size: 3rem;
     text-shadow: 2px 2px black;
     font-family: 'Anton', sans-serif;
@@ -421,24 +452,28 @@ h2#message:focus {
     animation: shake 0.5s ease-in infinite reverse;
 }
 
+#stand-btn.button, #hit-btn.button {
+    background-color: #dd972d;
+}
+
 .stand-text  p:nth-child(1n) {
-    color: #fca311
+    color: #ffe600
 }
   
 .stand-text   p:nth-child(2n) {
-    color: #ca6702
+    color: #fff56a
 }
 
 .stand-cont #stand-btn:hover:enabled p:nth-child(1n) {
     transform: rotate(8deg);
     animation: shake 0.5s ease infinite;
-    color: #fca311
+    color: #ffe600
 }
 
 .stand-cont #stand-btn:hover:enabled p:nth-child(2n) {
     transform: rotate(5deg);
     animation: shake 0.5s ease-out infinite reverse;
-    color: #ca6702
+    color: #fff56a
 }
   
 .stand-cont #stand-btn:hover:enabled p:nth-child(3n) {
@@ -452,23 +487,23 @@ h2#message:focus {
 }
   
 .hit-text  p:nth-child(1n) {
-    color: #ca6702;
+    color: #fff56a;
 }
   
 .hit-text   p:nth-child(2n) {
-    color: #fca311
+    color: #ffe600
 }
 
 .hit-cont #hit-btn:hover:enabled p:nth-child(1n) {
     transform: rotate(8deg);
     animation: shake 0.5s ease infinite;
-    color: #ca6702
+    color: #fff56a
 }
   
 .hit-cont #hit-btn:hover:enabled p:nth-child(2n) {
     transform: rotate(5deg);
     animation: shake 0.5s ease-out infinite reverse;
-    color: #fca311
+    color: #ffe600
 }
   
 .hit-cont #hit-btn:hover:enabled p:nth-child(3n) {

@@ -8,9 +8,12 @@
     <link rel="stylesheet" href="./css/external-styles.css" />
     <link rel="stylesheet" href="./card-deck-css/css/cardstarter.css" />
     <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gruppo&family=Bad+Script&family=Yellowtail&family=Exo+2&family=Anton&family=Montserrat&family=Sriracha&display=swap" rel="stylesheet">
     <script defer src="./js/app.js"></script>
 </head>
-<body id="mainContainer">
+<body id="main-container">
     <div class="background-image"></div>
     <header id="title" class="title-container">
         <div class="flux">BLACK</div><div class="neon">JACK</div>
@@ -19,38 +22,61 @@
         <!-- Shows Wins, Losses, Ties -->
         <div id="win" class="score">
             <h2>WINS</h2>
-            <span class="scoreNum"></span>
+            <span class="score-num"></span>
         </div>
         <div id="loss" class="score">
             <h2>LOSSES</h2>
-            <span class="scoreNum"></span>
+            <span class="score-num"></span>
         </div>
         <div id="tie" class="score">
             <h2>TIES</h2>
-            <span class="scoreNum"></span>
+            <span class="score-num"></span>
         </div>
         <div id="reset-area">
             <!-- Resets scoreboard -->
             <button id="reset-btn"></button>
         </div>
     </section>
-    <section id="messageArea">
+    <section id="message-area">
         <!-- Messages are updated below -->
         <h2 id="message">PRESS PLAY TO START</h2>
     </section>
+    <aside id="betting-area">
+        <div id="wallet" class="betting-div">
+            <h3 class="wallet-ttl z-sign">WALLET</h3>
+            <div id="wallet-amount" class="money">$0</div>
+        </div>
+        <div id="bets" class="betting-div">
+            <h3 class="wallet-ttl z-sign">BETS</h3>
+            <div id="bet-amount" class="money">$0</div>
+            <div id="bet-btns">
+                <button id="bet-100" class="poker-chips">$100</button>
+                <button id="bet-500" class="poker-chips">$500</button>
+                <button id="bet-1000" class="poker-chips">$1000</button>
+            </div>
+            <button id="bet-reset">CLEAR</button>
+        </div>
+        <div id="outcome" class="betting-div">
+            <h3 class="wallet-ttl z-sign">EARNINGS</h3>
+            <div id="earnings-amount" class="money">$0</div>
+        </div>
+        <div id="double-area">
+            <button id="double-btn">DOUBLE</button>
+        </div>
+    </aside>
     <main>
-        <div id="gameTable">
-            <h3 id="d-hand" class="holder-location">DEALER'S HAND:</h3>
+        <div id="game-table">
+            <h3 id="d-hand" class="holder-location w-sign">DEALER'S HAND:</h3>
             <div id="dealer">
             <!-- Dealer cards appear here -->
             </div>
-            <h3 id="p-hand" class="holder-location">PLAYER'S HAND:</h3>
+            <h3 id="p-hand" class="holder-location w-sign">PLAYER'S HAND:</h3>
             <div id="player">
             <!-- Player cards appear here -->
             </div>
         </div>
     </main>
-    <div id="dealerCurrentHand" class="y-sign hand-style">
+    <div id="dealer-current-hand" class="y-sign hand-style">
         <span class="hand"></span>
         <h3>DEALER'S HAND:</h3>
     </div>
@@ -104,7 +130,7 @@
             </div>
         </div>
         <!-- Output of player's hand summation -->
-        <div id="currentHand" class="y-sign hand-style">
+        <div id="current-hand" class="y-sign hand-style">
             <h3>CURRENT HAND:</h3>
             <span class="hand"></span>
         </div>
