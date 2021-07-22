@@ -194,7 +194,7 @@ function startingCards(area, hand, total, holder){
     firstTwo(hand);
 
     // Create card templates
-    if (holder == 'player') {
+    if (holder === 'player') {
         firstCard.classList.add('card', 'large', `${hand[0].face}`);
         secondCard.classList.add('card', 'large', `${hand[1].face}`);
     } else {
@@ -205,7 +205,7 @@ function startingCards(area, hand, total, holder){
     total += hand[1].value;
 
     // Update global hand total variables
-    if (holder == 'player') {
+    if (holder === 'player') {
         playersHandTotal = checkAce(hand, total);
         playersHand = hand;
         area.style.alignContent = 'center';
@@ -233,13 +233,17 @@ function firstTwo(hand) {
 
 function checkAce(hand, total){
     // Function to return an updated total hand value if an Ace is drawn and the total is over 21
-    for (let i = 0; i < hand.length; i++){
-        if (hand[i].face.includes('A') && hand[i].value === ACE_HIGH && total > TWENTY_ONE) {
-            hand[i].value = ACE_LOW;
-            total -= ACE_DIFF;
+    if (total <= 21) {
+        return total;
+    } else {
+        for (let i = 0; i < hand.length; i++){
+            if (hand[i].face.includes('A') && hand[i].value === ACE_HIGH && total > TWENTY_ONE) {
+                hand[i].value = ACE_LOW;
+                total -= ACE_DIFF;
+            }
         }
+        return total;
     }
-    return total;
 }
 
 function handleStand() {
@@ -459,11 +463,11 @@ function updateDealerHandTotal() {
 
 function dealerPulls() {
     // Function to add new cards to the dealer's hand
-    if (dealersHandTotal >= 16){
+    if (dealersHandTotal >= 21 || dealersHandTotal > playersHandTotal){
         return;
     }
     
-    while (dealersHandTotal < 16) {
+    while (dealersHandTotal < 21) {
         addNewCard(dealersHand, dealersHandTotal, dealerArea,  'dealer');
     }
 }
@@ -645,6 +649,9 @@ function updateEarnings() {
         earningsAmount.style.color = 'white';
         earningsAmount.textContent = `$0`;
     } else if (winner === 'player') {
+        if (playersHand.length === 2 && playersHandTotal === 21){
+            earnings = bet * 2;
+        }
         earningsAmount.style.color = 'green';
         earningsAmount.textContent = `+$${earnings}`;
     } else if (winner === 'dealer') {
@@ -696,7 +703,11 @@ function setEarningsToZero() {
 
 function updateWinnings() {
     if (winner === 'player') {
-        wallet += bet * 2;
+        if (playersHand.length === 2 && playersHandTotal === 21){
+            wallet += bet * 4;
+        } else {
+            wallet += bet * 2;
+        }
     } else if (winner === 'tie') {
         wallet += bet;
     }
