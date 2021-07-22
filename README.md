@@ -10,15 +10,16 @@ A play at this version of the game throws you into a global setting, wherein you
 
 Enjoy some smooth jazz as you place your bets and aim to win big against the house!
 
-## :hearts: Screenshots
+## :camera: Screenshots
 
 ![Alt text](https://github.com/CharlesAta/Blackjack/blob/master/assets/imgs/OpeningScreen.png?raw=true)
 ---
-[New Round](/assets/imgs/MiddleRound.png)
+![Alt text](https://github.com/CharlesAta/Blackjack/blob/master/assets/imgs/MiddleRound.png?raw=true)
 ---
-[Loss](/assets/imgs/Loss.png)
+![Alt text](https://github.com/CharlesAta/Blackjack/blob/master/assets/imgs/Loss.png?raw=true)
 ---
-[Win](/assets/imgs/Win.png)
+![Alt text](https://github.com/CharlesAta/Blackjack/blob/master/assets/imgs/Win.png?raw=true)
+---
 
 ## :clubs: Technologies Used 
 
