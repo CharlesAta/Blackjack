@@ -12,26 +12,28 @@ h2 {
     grid-template-rows: 1fr 5% repeat(8, 1fr);
     grid-template-areas: 
     'ttl ttl ttl ttl ttl ttl ttl ttl ttl'
-    '. . scr scr scr scr scr . .'
+    'msc . scr scr scr scr scr . .'
     'msg msg msg msg msg msg msg msg msg'
-    'bet bet brd brd brd brd brd dlr dlr'
+    'plc plc brd brd brd brd brd dlr dlr'
     'bet bet brd brd brd brd brd . .'
     'bet bet brd brd brd brd brd . .'
     'bet bet brd brd brd brd brd . .'
     'bet bet brd brd brd brd brd . .'
-    '. . brd brd brd brd brd . .'
+    'bet bet brd brd brd brd brd . .'
     'ftr ftr ftr ftr ftr ftr ftr ftr ftr';
     height: 100vh;
     width: 100vh;
     min-width: 1000px;
     align-content: center;
     margin: auto;
+    background-color: #000;
 }
 
 .background-image {
-    background-image: url('https://cdna.artstation.com/p/assets/images/images/017/099/450/large/patricia-kelen-takahashi-patriciakelen-com-10.jpg?1554648614');
+    background-image: url('/assets/imgs/patricia-kelen-takahashi-patriciakelen-com-10.jpg');
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100% 100%;
+    background-position: center;
     width: 100%;
     height: 100%;
     position: absolute;
@@ -57,7 +59,8 @@ h2 {
     justify-content: space-evenly;
     width: 60%;
     justify-self: center;
-    height: 80%;
+    height: 100%;
+    font-size: 1.25em;
 }
 
 .score {
@@ -81,7 +84,7 @@ h2 {
 #reset-btn {
     width: 2em;
     height: 2em;
-    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Refresh_icon.svg/1200px-Refresh_icon.svg.png");
+    background-image: url("/assets/imgs/1200px-Refresh_icon.svg.png");
     background-repeat: no-repeat;
     background-size: cover;
     border: none;
@@ -90,11 +93,32 @@ h2 {
 }
 /* ^^^ SCOREBOARD STYLING ^^^ */
 
+/* vvv MUSIC STYLING vvv */
+
+#music {
+    margin-left: 5%;
+    margin-top: 5%;
+}
+
+#bg-music-btn {
+    width: 2em;
+    height: 2em;
+    background-repeat: no-repeat;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
 /* vvv MESSAGE AREA STYLING vvv */
 #message-area {
     grid-area: msg;
 }
 /* ^^^ MESSAGE AREA STYLING ^^^ */
+
+/* vvv PLACE BETS MESSAGE AREA vvv */
+#place-bets-area {
+    grid-area: plc;
+}
+/* ^^^ PLACE BETS MESSAGE AREA ^^^ */
 
 /* vvv BETTING AREA STYLING vvv */
 #betting-area {
@@ -109,7 +133,6 @@ h2 {
     box-shadow: 0 0 10px 20px rgba(83, 83, 95, 0.781);
     width: 50%;
     height: 96%;
-    align-self: flex-end;
     margin-left: 20px;
 }
 
@@ -192,7 +215,6 @@ h2 {
     width: 100%;
     height: 10%;
 }
-
 /* ^^^ BETTING AREA STYLING ^^^ */
 
 /* vvv MAIN AREA STYLING vvv */
@@ -204,7 +226,7 @@ main {
 #game-table {
     border-radius: 50%;
     height: 100%;
-    background-image: url("https://www.playsmart.ca/wp-content/uploads/2020/04/breaking-down-the-table.png");
+    background-image: url("/assets/imgs/breaking-down-the-table.png");
     background-repeat: no-repeat;
     background-size: cover;
     display: grid;
@@ -315,10 +337,43 @@ footer {
     display: flex;
     flex-direction: column;
 }
-
 /* ^^^ FOOTER AREA STYLING & HAND TOTAL STYLING ^^^ */
 
-#bg-player {
-    width: 50px;
+
+/* vvv classes to be called in JavaScript */
+.normal-winner-glow {
+    box-shadow: 0 0 100px #fff inset, 0 0 20px #fff;
 }
 
+.blackjack-winner-glow {
+    box-shadow: 0 0 100px #ffb700 inset, 0 0 20px #ffb700;
+}
+
+.lock-bet-window {
+    color: grey;
+}
+
+.set-double-window {
+    box-shadow: 0 0 20px #f77f00 inset;
+}
+
+.set-double-glow {
+        box-shadow: 0 0 30px 10px rgba(255, 200, 20, 0.733);
+}
+
+.over-bet {
+    color: red;
+}
+
+.music-on {
+    background-image: url("/assets/imgs/musicOn.png");
+    background-size: cover;
+    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.3) inset;
+}
+
+.music-off {
+    background-image: url('/assets/imgs/musicoff.png');
+    background-size: 50% 50%;
+    background-position: center;
+    box-shadow: 0 0 10px 1px #000 inset;
+}

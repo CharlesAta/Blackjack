@@ -1,83 +1,85 @@
-# Project-1
+# :spades: Blackjack 
 
-## 1. Analyze the app's functionality
-<!-- 
-The app's features, from the user's point of view, should be described using User Stories. User stories follow this template: As a [role], I want [feature] because [reason]. Example user story: As a player, I want to see a list of high-scores so that I know what I have to score to make the list. -->
+Welcome everyone to Blackjack!
 
-As a player, I want to see what cards I am dealt.
-As a player, I want the option to stay with my current hand.
-As a player, I want the option the option to ask for another card (ie. "hit me")
-As a player, I want to be able to see one of the dealer's cards
-As a player, I want to be able to know whether I won.
-As a player I want to be able to know whether I lost.
-As a player, I want to be able to know if there is a tie.
-As a player, I want to know know what my current hand adds to.
-As a player, I want to be able to start/reset the game.
-As a player, I want to know if my initial hand is equal to 21.
+Blackjack is the casino based game where players compete against the house, rather than each other. The objective of the game is to get a hand total of closer to 21 than the dealer without going over 21.
 
-Future implementations:
-- Add a betting option
+Formerly "Black Jack" and "Vingt-Un", Blackjack is the most widely played casino banking game in the world - what better game to base a project on?
 
-## 2. Think about the overall design (look & feel) of the app
+A play at this version of the game throws you into a global setting, wherein you have various attractions to marvel at from around the world, with all the glitz and glamour of being at a casino.
 
-<!-- Take the users (audience) of the app into consideration.
+Enjoy some smooth jazz as you place your bets and aim to win big against the house!
 
-Should the app have a clean/minimalist UI (current trend), or should it be themed to match the app's purpose? -->
-The app can either have a minimalistic look, or take place in a casino setting (like on a table).
+## :hearts: Screenshots
 
-## 3. Wireframe the UI
+[Start Screen](/assets/imgs/OpeningScreen.png)
+---
+[New Round](/assets/imgs/MiddleRound.png)
+---
+[Loss](/assets/imgs/Loss.png)
+---
+[Win](/assets/imgs/Win.png)
 
-<!-- Wireframes provide a blueprint for the HTML & CSS.
-Wireframes also help reveal an application's data (state) and functionality. -->
+## :clubs: Technologies Used 
 
-## 4. Pseudocode
+- HTML
+- CSS
+- JavaScript
+- jQuery
 
-1) Define required constants
-    1.1) Use an object to represent all available cards in the deck and their numeric value
-    1.2) 
+## :diamonds: Getting Started 
 
-2) Define required variables used to track the state of the game
-    2.1) Array to hold the player's hand
-    2.2) Variable to know whether it's a tie, win, loss and the respective score
-    2.3) Variable to hold the current hand 
-    2.4) Variable to hold the dealer's hand total value
+### The Rules are Simple
+---
+- The goal of the game is to get a cummulative sum of 21 in your hand.
+- Avoid breaking 21 or it's a loss!
+- The dealer is out to beat you, and so their goal is to have a number higher than yours while still remaining 21 or under.
+- Face cards (ie. Jack, Queen, King), are worth 10.
+- An Ace is worth 11 and/or 1, depending on the total sum in the player's hand.
+- Both the player and the dealer start with two cards. One of the dealer's cards are hidden.
+- Once the player has compeleted their move set, the dealer will decide whether to draw or stay and then flip their card(s).
+- If the player breaks 21, the dealer wins.
+- If the player's initial two cards equate to 21, it's blackjack and the bet earnings are doubled.
 
-3) Store elements on the page that will be accessed in code more than once in variables to make code more concise, readable and performant.
-    3.1) Store play btn
-    3.2) Store Stand btn
-    3.3) Store hit btn
+### Betting Rules
+---
+- Players start with an initial $1000 in their wallet.
+- All bets are the be place before or at the end of rounds. The place bets sign will be illuminated when betting is available.
+- A bet cannot exceed the amount of money in the wallet.
+- A double bet can be placed when the amount of money in the wallet is an adequate amount, and an initial bet has been placed.
+- All bets are locked in until the end of the round.
 
-4) Upon loading the app should:
-	4.1) Initialize the state variables
-        4.1.1) Start with an empty game, no cards dealt yet
-        4.1.2) W T L set to 0
-        4.1.3) Message saying "Press play to start"
-        4.1.4) Stand and Hit buttons must not do anything until the game is in progress
-	4.2) Render the state variables to the page once the game begins
-        4.2.1) Show one of the dealer's cards
-        4.2.2) Show both player's cards
-        4.2.3) Show the player's current hand total
-        4.2.4) Show message prompting the player to hit or stand
-	4.3) Wait for the user to click a button
+### How to Play
+---
+- Bets can be placed at the start/end of rounds using the $100, $500, $1000 chips in the betting area.
+- If an attempt to go over the amount in the wallet, the respective amount will be disabled to add to the bet.
+- If a bet is mistakenly made, all bets can be undone by using the "CLEAR" button. This will clear the current bet.
+- The "HIT" and "STAND" buttons are disabled between rounds.
+- To start a round, press "PLAY".
+- If no bets are made, rounds may be reset, otherwise, the bet is locked in until the end of the round.
+- Once both the player and the dealer have two cards, the player will have the option to double their bet by using the "DOUBLE" button, if doubling the be is valid (ie. funds are available and a bet has been made).
+- The player has the option to "HIT" or "STAND".
+- By pressing the "STAND" button, the winner submits their current hand in competition with the dealer. The dealer has the option to draw more cards.
+- By pressing the "HIT" button, the player draws an additional card.
+- Cards can be drawn until a player clicks the "STAND" button, or the player's hand equates to 21 and over.
+- Once the player has stood, the dealer has drawn an flipped their cards - the winner is shown.
+- Once a winner is shown, bets are available once again, and the next round will begin once the "PLAY AGAIN?" button has been pressed.
 
-5) Handle a player clicking stand
-    5.1) If the player clicks stand, the dealer's second card is shown
-    5.2) If the player has a hand larger than the dealer's and it is below 21, the player wins
-    5.3) if the player has a hand smaller than the dealer's, the dealer wins
-    5.4) if the player and the dealer have the same hand total, it's a tie and a tie message is rendered
+### Additional Features
+---
+- The scoreboard can be reset by pressing the button to the right of "TIES".
+- The background music can be muted by pressing the speaker icon to the top left of the neon message sign (inline with the scoreboard).
 
-6) Handle a player clicking hit
-    6.1) If the player clicks hit, the next card is added to the player's hand and the player's current hand total is updated. The render function is then called to update the state variables
-    6.2) If the hand is less than 21, the player has the option to hit or stand
-    6.3) If the hand is more than 21, the player loses, and a loss message is rendered
-    6.4) If the hand is equal to 21, the player wins, and a win message is rendered
+## :pencil: Future Enhancements
 
-7) Handle a win, loss, or tie
-    7.1) If a W L T, the stand and hit btns must no longer do anything. the play button must be pressed for a new round.
+- Ability to play on various screen sizes
+- Option to split hand
+- Ability to create an account
+- Ability to add money to wallet
+- Leaderboards
 
-8) Handle a player clicking the play button
-    8.1) If the pressed, the dealer and player hands are reset to two initial cards each
-
-9) Possible Game Note
-    8.1) If a player gets an Ace, they can use it as a 1 or an 11
-    8.2) MEssage prompting user whether Ace will be equal to 1 or 11 if Ace is drawn
+## :pray: Credits
+- Background Music by [Dee Yan-Key](https://freemusicarchive.org/music/Dee_Yan-Key)
+- Sound Effects by [Zapsplat](https://www.zapsplat.com/)
+- Background Image by [Patricia Kelen](https://www.artstation.com/artwork/gJOXRE)
+- CSS styling resources cited in external-styles.css

@@ -18,13 +18,19 @@ const HAND_DIV_MAX_LIMIT = 4;
 
 const player = new Audio();
 const sounds = {
-    playSound: './css/sounds/playSound.mp3',
-    refreshSound: './css/sounds/refreshSound.mp3',
-    winSound: './css/sounds/winSound.mp3',
-    lossSound: './css/sounds/lossSound.mp3',
-    dealSound: './css/sounds/dealSound.mp3',
-    drawSound: './css/sounds/drawSound.mp3',
-    tieSound: './css/sounds/tieSound.mp3'
+    playSound: '/assets/sounds/playSound.mp3',
+    refreshSound: '/assets/sounds/refreshSound.mp3',
+    standSound: '/assets/sounds/standSound.mp3',
+    winSound: '/assets/sounds/winSound.mp3',
+    lossSound: '/assets/sounds/lossSound.mp3',
+    dealSound: '/assets/sounds/dealSound.mp3',
+    drawSound: '/assets/sounds/drawSound.mp3',
+    tieSound: '/assets/sounds/tieSound.mp3', 
+    bet100Sound: '/assets/sounds/100bet.mp3', 
+    bet500Sound: '/assets/sounds/500bet.mp3',
+    bet1000Sound: '/assets/sounds/1000bet.mp3',
+    clearSound: '/assets/sounds/clear.mp3',
+    doubleSound: '/assets/sounds/doubleBtn.mp3'
 }
 
 const STARTING_MONEY = 1000;
@@ -52,6 +58,8 @@ let inPlay = false;
 let madeBet = false;
 let resetBet = false;
 let doubleBet = false;
+let doubleBetAllowed = false;
+let bgMusic = true;
 
 let wallet = 0;
 let bet = 0;
@@ -77,6 +85,7 @@ const currentHandArea = document.querySelector('#current-hand > span');
 const dealerCurrentHandArea = document.querySelector('#dealer-current-hand > span');
 
 const bgPlayer = document.querySelector('#bg-player');
+const bgPlayerBtn = document.getElementById('bg-music-btn');
 
 const bettingArea = document.querySelector('#betting-area');
 const walletAmount = document.querySelector('#wallet-amount > p');
@@ -92,6 +101,7 @@ const doubleButton = document.querySelector('#double-btn');
 options.addEventListener('click', handleClick);
 resetScoreBtn.addEventListener('click', resetScoreboard);
 bettingArea.addEventListener('click', handleBet);
+bgPlayerBtn.addEventListener('click', toggleBgSound);
 
 /*----- code ------*/
 bgPlayer.volume = .02;
@@ -160,7 +170,12 @@ function init() {
 
     if (inPlay && bet > 0){
         disablePlay();
-        enableDouble();
+        if (bet * 2 > wallet){
+            disableDouble();
+        } else{ 
+            setDoubleGlow();
+            enableDouble();
+        }
     }
 
     if (startClick){
@@ -176,7 +191,10 @@ function init() {
     updateDealerHandTotal();
 
     if (playersHandTotal === TWENTY_ONE){
-        checkWinner();
+        dealerPulls();
+        flipDealerCard();
+        render();
+        setTimeout(checkWinner, 1000);  
     } else {
         render();
     }
@@ -216,8 +234,8 @@ function startingCards(area, hand, total, holder){
 
 
     // Add cards to HTML
-    area.appendChild(firstCard);
-    area.appendChild(secondCard);
+    $(firstCard).hide().appendTo(area).fadeIn();
+    $(secondCard).hide().appendTo(area).fadeIn();
 }
 
 function firstTwo(hand) {
@@ -248,13 +266,14 @@ function checkAce(hand, total){
 
 function handleStand() {
     // Function to handle the stand button being clicked
-    checkWinner();
+    dealerPulls();
+    flipDealerCard();
+    render();
+    setTimeout(checkWinner, 1000);  
 }
 
 function checkWinner() {
     // Function to check the winner
-    // Dealer pulls any cards before the check
-    dealerPulls();
 
     // Define when a tie
     if (playersHandTotal === dealersHandTotal || playersHandTotal > TWENTY_ONE && dealersHandTotal > TWENTY_ONE){
@@ -299,7 +318,14 @@ function handleHit() {
 
     addNewCard(playersHand, playersHandTotal, playerArea, 'player');
 
-    (playersHandTotal >= TWENTY_ONE) ? checkWinner() : render();
+    if (playersHandTotal >= TWENTY_ONE) {
+        dealerPulls();
+        flipDealerCard();
+        render();
+        setTimeout(checkWinner, 1000);  
+    }  else {
+        render();
+    } 
 }
 
 function flipDealerCard() {
@@ -329,12 +355,17 @@ function render(){
 
     if (doubleBet) {
         updateBet();
+        resetDoubleGlow();
+    }
+
+    if (flip) {
+        updateDealerHandTotal();
+        flip = false;
+        return;
     }
 
     // If a winner exists
-    if (winner) {
-        flipDealerCard();
-        updateDealerHandTotal();
+    if (winner) {       
         disableMoves();
         updateScoreboard();
         playButtonText('play again?');
@@ -439,11 +470,6 @@ function playButtonText(str) {
     for (let letter of letters){
             lettersArr.push(`<p>${letter}</p>`);
     }
-    if (str.length > 5){
-        words.style.fontSize = '2rem';
-    } else {
-        words.style.fontSize = '3rem';
-    }
     words.innerHTML = lettersArr.join('');
 }
 
@@ -463,11 +489,11 @@ function updateDealerHandTotal() {
 
 function dealerPulls() {
     // Function to add new cards to the dealer's hand
-    if (dealersHandTotal >= 21 || dealersHandTotal > playersHandTotal){
+    if (dealersHandTotal >= 21 || playersHandTotal > 21 || dealersHandTotal > playersHandTotal){
         return;
     }
     
-    while (dealersHandTotal < 21) {
+    while (dealersHandTotal < playersHandTotal) {
         addNewCard(dealersHand, dealersHandTotal, dealerArea,  'dealer');
     }
 }
@@ -518,7 +544,7 @@ function addNewCard(hand, total, area,  holder){
         }
     }
     
-    area.appendChild(newCard);
+    $(newCard).hide().appendTo(area).fadeIn();
     
     if (holder === "player") {
         playersHandTotal = checkAce(hand, total);
@@ -537,26 +563,26 @@ function addWinnerGlow(winner) {
     // Function to add glow to the winning area
     if (winner === 'player'){
         if (playersHandTotal === TWENTY_ONE) {
-            playerArea.style.boxShadow = '0 0 100px #ffb700 inset, 0 0 20px #ffb700';
+            playerArea.classList.add('blackjack-winner-glow');
         } else {
-            playerArea.style.boxShadow = '0 0 100px #fff inset, 0 0 20px #fff';
+            playerArea.classList.add('normal-winner-glow');
         }
     } else if (winner === 'dealer') {
         if (dealersHandTotal === TWENTY_ONE) {
-            dealerArea.style.boxShadow = '0 0 100px #ffb700 inset, 0 0 20px #ffb700';
+            dealerArea.classList.add('blackjack-winner-glow');
         } else {
-            dealerArea.style.boxShadow = '0 0 100px #fff inset, 0 0 20px #fff';
+            dealerArea.classList.add('normal-winner-glow');
         }
     } else {
-        playerArea.style.boxShadow = '0 0 100px #fff inset, 0 0 20px #fff';
-        dealerArea.style.boxShadow = '0 0 100px #fff inset, 0 0 20px #fff';
+        playerArea.classList.add('normal-winner-glow');
+        dealerArea.classList.add('normal-winner-glow');
     }
 }
 
 function resetWinnerGlow() {
     // Function to reset the area glow
-    playerArea.style.boxShadow = null;
-    dealerArea.style.boxShadow = null;
+    playerArea.classList.remove('blackjack-winner-glow', 'normal-winner-glow');
+    dealerArea.classList.remove('blackjack-winner-glow', 'normal-winner-glow');
 }
 
 function playSound(name) {
@@ -574,14 +600,19 @@ function startingWallet() {
 function handleBet(evt) {
     // Function to handle a bet
     if (evt.target === bet100){
+        playSound('bet100Sound');
         addBet(ONE_HUNDRED);
     } else if (evt.target === bet500) {
+        playSound('bet500Sound');
         addBet(FIVE_HUNDRED);
     } else if (evt.target === bet1000) {
+        playSound('bet1000Sound');
         addBet(ONE_THOUSAND);
     } else if (evt.target === betResetButton) {
+        playSound('clearSound');
         clearBet();
     } else if (evt.target === doubleButton) {
+        playSound('doubleSound');
         activateDouble();
     }
 }
@@ -596,7 +627,7 @@ function addBet(amount) {
         updateWallet();
         render();
     } else if (wallet - amount < 0) {
-        betAmount.style.color = 'red';
+        overBet();
         if (amount === ONE_HUNDRED){
             disableBet100();
         } else if (amount === FIVE_HUNDRED){
@@ -606,6 +637,14 @@ function addBet(amount) {
         }
     }
     madeBet = false;
+}
+
+function overBet() {
+    betAmount.classList.add('over-bet');
+}
+
+function resetOverBet() {
+    betAmount.classList.remove('over-bet');
 }
 
 function updateBet() {
@@ -619,7 +658,7 @@ function clearBet() {
     updateWallet();
     bet = 0;
     render();
-    unlockBetWindow();
+    resetOverBet();
     enableBets();
     resetBet = false;
 }
@@ -634,12 +673,13 @@ function updateWallet() {
 
 function lockBetWindow() {
     // Function to set the styling of the bet window to grey
-    betAmount.style.color = 'grey';
+
+    betAmount.classList.add('lock-bet-window');
 }
 
 function unlockBetWindow() {
     // Function to reset the styling of the bet window 
-    betAmount.style.color = 'white';
+    betAmount.classList.remove('lock-bet-window');
 }
 
 function updateEarnings() {
@@ -662,6 +702,7 @@ function updateEarnings() {
 
 function disableBets() {
     // Function to disable all the bet buttons as group
+    turnOffBets();
     disableBet100();
     disableBet500();
     disableBet1000();
@@ -670,6 +711,7 @@ function disableBets() {
 
 function enableBets() {
     // Function to enable all the bet buttons as a group
+    turnOnBets();
     bet100.disabled = false;
     bet500.disabled = false;
     bet1000.disabled = false;
@@ -698,10 +740,12 @@ function setBetToZero() {
 }
 
 function setEarningsToZero() {
+    // Function to reset the earnings
     earnings = 0;
 }
 
 function updateWinnings() {
+    // Funciton to update the earnings into the wallet
     if (winner === 'player') {
         if (playersHand.length === 2 && playersHandTotal === 21){
             wallet += bet * 4;
@@ -714,32 +758,39 @@ function updateWinnings() {
 }
 
 function disablePlay() {
+    // Function to disbale the play button when a bet is made
     playBtn.disabled = true;
 }
 
 function enablePlay() {
+    // Function to enable the play button
     playBtn.disabled = false;
 }
 
 function disableDouble() {
+    // Function to disable the double button when a double cant be made
     doubleButton.disabled = true;
 }
 
 function enableDouble() {
+    // Function to enable the double button when a double can be made
     doubleButton.disabled = false;
 }
 
 function setDoubleWindow() {
+    // Function to add a glow to the bets window when double is used
     unlockBetWindow();
-    document.querySelector('#bet-amount').style.boxShadow = '0 0 20px #f77f00 inset';
+    document.querySelector('#bet-amount').classList.add('set-double-window');
 
 }
 
 function resetDoubleWindow() {
-    document.querySelector('#bet-amount').style.boxShadow = '0 0 20px #000 inset';
+    // Function to remove the double glow from the bets window
+    document.querySelector('#bet-amount').classList.remove('set-double-window');
 }
 
 function activateDouble() {
+    // Function to activate the double effect
     let currentBet = bet
     if (wallet - currentBet >= 0){
         doubleBet = true;
@@ -749,5 +800,44 @@ function activateDouble() {
         updateWallet();
         disableDouble();
         render();
+    }
+}
+
+function setDoubleGlow() {
+    // Function to add the glow from the double button
+    document.querySelector('#double-area').classList.add('set-double-glow');
+}
+
+function resetDoubleGlow() {
+    // Function to remove the glow from the double button
+    document.querySelector('#double-area').classList.remove('set-double-glow');
+}
+
+function turnOffBets() {
+    // Function to turn the bets neon sign off
+    document.body.style.setProperty('--bets-neon-text-color', `#2d443f`);
+    document.body.style.setProperty('--bets-neon-border-color', `#344d3a`);
+    document.querySelector('#place-bets').style.animation = 'null';
+}
+
+function turnOnBets() {
+    // Function to turn the bets neon sign on
+    document.body.style.setProperty('--bets-neon-text-color', `#10ac8a`);
+    document.body.style.setProperty('--bets-neon-border-color', `#00ad2b`);
+    document.querySelector('#place-bets').style.animation = 'bets-flicker-msg 1.5s infinite alternate';
+}
+
+function toggleBgSound(evt) {
+    // Function to toggle the background music
+    if (evt.target === bgPlayerBtn && bgMusic) {
+        bgPlayerBtn.classList.add('music-off');
+        bgPlayerBtn.classList.remove('music-on');
+        bgPlayer.pause();
+        bgMusic = false;
+    } else if (evt.target === bgPlayerBtn && !bgMusic) {
+        bgPlayerBtn.classList.add('music-on');
+        bgPlayerBtn.classList.remove('music-off');
+        bgPlayer.play();
+        bgMusic = true;
     }
 }
