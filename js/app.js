@@ -18,19 +18,19 @@ const HAND_DIV_MAX_LIMIT = 4;
 
 const player = new Audio();
 const sounds = {
-    playSound: '/assets/sounds/playSound.mp3',
-    refreshSound: '/assets/sounds/refreshSound.mp3',
-    standSound: '/assets/sounds/standSound.mp3',
-    winSound: '/assets/sounds/winSound.mp3',
-    lossSound: '/assets/sounds/lossSound.mp3',
-    dealSound: '/assets/sounds/dealSound.mp3',
-    drawSound: '/assets/sounds/drawSound.mp3',
-    tieSound: '/assets/sounds/tieSound.mp3', 
-    bet100Sound: '/assets/sounds/100bet.mp3', 
-    bet500Sound: '/assets/sounds/500bet.mp3',
-    bet1000Sound: '/assets/sounds/1000bet.mp3',
-    clearSound: '/assets/sounds/clear.mp3',
-    doubleSound: '/assets/sounds/doubleBtn.mp3'
+    playSound: '../assets/sounds/playSound.mp3',
+    refreshSound: '../assets/sounds/refreshSound.mp3',
+    standSound: '../assets/sounds/standSound.mp3',
+    winSound: '../assets/sounds/winSound.mp3',
+    lossSound: '../assets/sounds/lossSound.mp3',
+    dealSound: '../assets/sounds/dealSound.mp3',
+    drawSound: '../assets/sounds/drawSound.mp3',
+    tieSound: '../assets/sounds/tieSound.mp3', 
+    bet100Sound: '../assets/sounds/100bet.mp3', 
+    bet500Sound: '../assets/sounds/500bet.mp3',
+    bet1000Sound: '../assets/sounds/1000bet.mp3',
+    clearSound: '../assets/sounds/clear.mp3',
+    doubleSound: '../assets/sounds/doubleBtn.mp3'
 }
 
 const STARTING_MONEY = 1000;

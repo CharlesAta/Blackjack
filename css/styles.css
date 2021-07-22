@@ -30,7 +30,7 @@ h2 {
 }
 
 .background-image {
-    background-image: url('/assets/imgs/patricia-kelen-takahashi-patriciakelen-com-10.jpg');
+    background-image: url('https://github.com/CharlesAta/Blackjack/blob/master/assets/imgs/patricia-kelen-takahashi-patriciakelen-com-10.jpg?raw=true');
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-position: center;
@@ -84,7 +84,7 @@ h2 {
 #reset-btn {
     width: 2em;
     height: 2em;
-    background-image: url("/assets/imgs/1200px-Refresh_icon.svg.png");
+    background-image: url("https://github.com/CharlesAta/Blackjack/blob/master/assets/imgs/1200px-Refresh_icon.svg.png?raw=true");
     background-repeat: no-repeat;
     background-size: cover;
     border: none;
@@ -226,7 +226,7 @@ main {
 #game-table {
     border-radius: 50%;
     height: 100%;
-    background-image: url("/assets/imgs/breaking-down-the-table.png");
+    background-image: url("https://github.com/CharlesAta/Blackjack/blob/master/assets/imgs/breaking-down-the-table.png?raw=true");
     background-repeat: no-repeat;
     background-size: cover;
     display: grid;
@@ -366,13 +366,13 @@ footer {
 }
 
 .music-on {
-    background-image: url("/assets/imgs/musicOn.png");
+    background-image: url("https://github.com/CharlesAta/Blackjack/blob/master/assets/imgs/musicOn.png?raw=true");
     background-size: cover;
     box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.3) inset;
 }
 
 .music-off {
-    background-image: url('/assets/imgs/musicoff.png');
+    background-image: url('https://github.com/CharlesAta/Blackjack/blob/master/assets/imgs/musicoff.png?raw=true');
     background-size: 50% 50%;
     background-position: center;
     box-shadow: 0 0 10px 1px #000 inset;

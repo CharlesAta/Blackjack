@@ -30,6 +30,8 @@ Enjoy some smooth jazz as you place your bets and aim to win big against the hou
 
 ## :diamonds: Getting Started 
 
+### [PLAY HERE](https://charlesata.github.io/Blackjack/)
+
 ### The Rules are Simple
 ---
 - The goal of the game is to get a cummulative sum of 21 in your hand.
