@@ -12,7 +12,7 @@ Enjoy some smooth jazz as you place your bets and aim to win big against the hou
 
 ## :hearts: Screenshots
 
-[Start Screen](/assets/imgs/OpeningScreen.png)
+![Alt text](https://github.com/CharlesAta/Blackjack/blob/master/assets/imgs/OpeningScreen.png?raw=true)
 ---
 [New Round](/assets/imgs/MiddleRound.png)
 ---
