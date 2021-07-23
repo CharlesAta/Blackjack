@@ -1049,7 +1049,7 @@ h2#place-bets:focus {
 /* ^^^^^^^^^^^ CSS styling for the play, hit, stand buttons. Source: https://codepen.io/balazs-d/pen/OJRPZKz */
 
 
-@media screen and (max-height: 900px) and (max-width: 1400px) {
+@media screen and (max-height: 900px) {
     #scoreboard {
         width: 70%;
         height: 100%;
