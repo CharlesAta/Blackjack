@@ -12,9 +12,9 @@ h2 {
     grid-template-rows: 1fr 5% repeat(8, 1fr);
     grid-template-areas: 
     'msc . . ttl ttl ttl ttl ttl ttl ttl ttl ttl . . .'
-    '. . . . . scr scr scr scr scr . . . . .'
-    '. . . msg msg msg msg msg msg msg msg msg . . .'
-    '. plc plc . . brd brd brd brd brd dlr dlr . . .'
+    '. plc plc . . scr scr scr scr scr . . . . .'
+    '. bet bet msg msg msg msg msg msg msg msg msg . . .'
+    '. bet bet . . brd brd brd brd brd dlr dlr . . .'
     '. bet bet . . brd brd brd brd brd . . . . .'
     '. bet bet . . brd brd brd brd brd . . . . .'
     '. bet bet . . brd brd brd brd brd . . . . .'
