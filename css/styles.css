@@ -8,22 +8,21 @@ h2 {
 
 #main-container {
     display: grid;
-    grid-template-columns: repeat(15, 1fr);
+    grid-template-columns: repeat(9, 1fr);
     grid-template-rows: 1fr 5% repeat(8, 1fr);
     grid-template-areas: 
-    'msc . . ttl ttl ttl ttl ttl ttl ttl ttl ttl . . .'
-    '. . . . . scr scr scr scr scr . . . . .'
-    '. . . msg msg msg msg msg msg msg msg msg . . .'
-    '. plc plc . . brd brd brd brd brd dlr dlr . . .'
-    '. bet bet . . brd brd brd brd brd . . . . .'
-    '. bet bet . . brd brd brd brd brd . . . . .'
-    '. bet bet . . brd brd brd brd brd . . . . .'
-    '. bet bet . . brd brd brd brd brd . . . . .'
-    '. bet bet . . brd brd brd brd brd . . . . .'
-    '. . . ftr ftr ftr ftr ftr ftr ftr ftr ftr . . .';
+    'ttl ttl ttl ttl ttl ttl ttl ttl ttl'
+    'msc . scr scr scr scr scr . .'
+    'msg msg msg msg msg msg msg msg msg'
+    'plc plc brd brd brd brd brd dlr dlr'
+    'bet bet brd brd brd brd brd . .'
+    'bet bet brd brd brd brd brd . .'
+    'bet bet brd brd brd brd brd . .'
+    'bet bet brd brd brd brd brd . .'
+    'bet bet brd brd brd brd brd . .'
+    'ftr ftr ftr ftr ftr ftr ftr ftr ftr';
     height: 100vh;
-    width: 100vw;
-    min-width: 1000px;
+    width: 100vh;
     align-content: center;
     margin: auto;
     background-color: #000;
