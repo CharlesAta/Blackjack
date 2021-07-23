@@ -18,19 +18,19 @@ const HAND_DIV_MAX_LIMIT = 4;
 
 const player = new Audio();
 const sounds = {
-    playSound: 'https://github.com/CharlesAta/Blackjack/blob/master/assets/sounds/playSound.mp3?raw=true',
-    refreshSound: 'https://github.com/CharlesAta/Blackjack/blob/master/assets/sounds/refreshSound.mp3?raw=true',
-    standSound: 'https://github.com/CharlesAta/Blackjack/blob/master/assets/sounds/standSound.mp3?raw=true',
-    winSound: 'https://github.com/CharlesAta/Blackjack/blob/master/assets/sounds/winSound.mp3?raw=true',
-    lossSound: 'https://github.com/CharlesAta/Blackjack/blob/master/assets/sounds/lossSound.mp3?raw=true',
-    dealSound: 'https://github.com/CharlesAta/Blackjack/blob/master/assets/sounds/dealSound.mp3?raw=true',
-    drawSound: 'https://github.com/CharlesAta/Blackjack/blob/master/assets/sounds/drawSound.mp3?raw=true',
-    tieSound: 'https://github.com/CharlesAta/Blackjack/blob/master/assets/sounds/tieSound.mp3?raw=true', 
-    bet100Sound: 'https://github.com/CharlesAta/Blackjack/blob/master/assets/sounds/100bet.mp3?raw=true', 
-    bet500Sound: 'https://github.com/CharlesAta/Blackjack/blob/master/assets/sounds/500bet.mp3?raw=true',
-    bet1000Sound: 'https://github.com/CharlesAta/Blackjack/blob/master/assets/sounds/1000bet.mp3?raw=true',
-    clearSound: 'https://github.com/CharlesAta/Blackjack/blob/master/assets/sounds/clear.mp3?raw=true',
-    doubleSound: 'https://github.com/CharlesAta/Blackjack/blob/master/assets/sounds/doubleBtn.mp3?raw=true'
+    playSound: '../assets/sounds/playSound.mp3',
+    refreshSound: '../assets/sounds/refreshSound.mp3',
+    standSound: '../assets/sounds/standSound.mp3',
+    winSound: '../assets/sounds/winSound.mp3',
+    lossSound: '../assets/sounds/lossSound.mp3',
+    dealSound: '../assets/sounds/dealSound.mp3',
+    drawSound: '../assets/sounds/drawSound.mp3',
+    tieSound: '../assets/sounds/tieSound.mp3', 
+    bet100Sound: '../assets/sounds/100bet.mp3', 
+    bet500Sound: '../assets/sounds/500bet.mp3',
+    bet1000Sound: '../assets/sounds/1000bet.mp3',
+    clearSound: '../assets/sounds/clear.mp3',
+    doubleSound: '../assets/sounds/doubleBtn.mp3'
 }
 
 const STARTING_MONEY = 1000;
