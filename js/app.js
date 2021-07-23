@@ -303,6 +303,7 @@ function checkWinner() {
         updateEarnings();
         enablePlay();
         disableDouble();
+        resetDoubleGlow();
         resetDoubleWindow();
         inPlay = false;
         doubleBet = false;
