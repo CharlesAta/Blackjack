@@ -158,7 +158,7 @@
 
 :root {
     /* Base font size */
-    font-size: 10%;   
+    font-size: 10px;   
     
     /* Set neon color */
     --neon-text-color: #ac1066;
@@ -172,22 +172,22 @@
     align-items: center;  
     background: linear-gradient(transparent, rgba(0, 0, 0, 0.5), transparent);
     max-height: 80%;
-    width: 90%;
+    width: 100%;
 }
 
 h2#message {
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 200;
     font-style: italic;
     color: #e7cee3;
-    padding: 1% 1% 1%;
+    padding: 2rem 4rem 3.5rem;
     border: 0.4rem solid #e7cee3;
     border-radius: 2rem;
     text-transform: uppercase;
     animation: flicker-msg 1.5s infinite alternate;
     width: 100%;     
     text-align: center;
-    margin-top: 3%;
+    margin-top: 20px;
 }
 
 h2#message::-moz-selection {
@@ -257,7 +257,7 @@ h2#place-bets {
     font-weight: 200;
     font-style: italic;
     color: #e7cee3;
-    padding: 2% 4% 1.5%;
+    padding: 1rem 2rem 1.5rem;
     border: 0.2rem solid #e7cee3;
     border-radius: 2rem;
     text-transform: uppercase;
@@ -363,7 +363,7 @@ h2#place-bets:focus {
 .cont {
     position: relative;
     width: 100%;
-    height: 4rem;
+    height: 50%;
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0px 0px 15px black;
@@ -491,7 +491,7 @@ h2#place-bets:focus {
     display: flex;
     position: absolute;
     top: 0;
-    font-size: 2.5rem;
+    font-size: 3rem;
     text-shadow: 2px 2px black;
     font-family: 'Anton', sans-serif;
     pointer-events: none;  
@@ -585,7 +585,7 @@ h2#place-bets:focus {
 
 .double-cont {
     width: 100%;
-    height: 3rem;
+    height: 100%;
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0px 0px 15px black;
@@ -614,7 +614,7 @@ h2#place-bets:focus {
     display: flex;
     position: absolute;
     top: 0;
-    font-size: 2rem;
+    font-size: 3rem;
     text-shadow: 2px 2px black;
     font-family: 'Anton', sans-serif;
     pointer-events: none;  

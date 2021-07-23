@@ -12,9 +12,9 @@ h2 {
     grid-template-rows: 1fr 5% repeat(8, 1fr);
     grid-template-areas: 
     'msc . . ttl ttl ttl ttl ttl ttl ttl ttl ttl . . .'
-    '. plc plc . . scr scr scr scr scr . . . . .'
-    '. bet bet msg msg msg msg msg msg msg msg msg . . .'
-    '. bet bet . . brd brd brd brd brd dlr dlr . . .'
+    '. . . . . scr scr scr scr scr . . . . .'
+    '. . . msg msg msg msg msg msg msg msg msg . . .'
+    '. plc plc . . brd brd brd brd brd dlr dlr . . .'
     '. bet bet . . brd brd brd brd brd . . . . .'
     '. bet bet . . brd brd brd brd brd . . . . .'
     '. bet bet . . brd brd brd brd brd . . . . .'
@@ -48,7 +48,7 @@ h2 {
     text-align: center;
     padding: 0;
     margin: 0;
-    min-width: 100%;
+    width: 100%;
 }
 
 /* vvv SCOREBOARD STYLING vvv */
@@ -57,10 +57,10 @@ h2 {
     background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(85, 19, 19, 0.7));
     display: flex;
     justify-content: space-evenly;
-    min-width: 40%;
+    width: 60%;
     justify-self: center;
-    min-height: 100%;
-    font-size: 100%;
+    height: 100%;
+    font-size: 1.25em;
 }
 
 .score {
@@ -71,19 +71,19 @@ h2 {
 }
 
 .score-num {
-    font-size: 2rem;
+    font-size: 1.5em;
     font-weight: 900;
 }
 
 #reset-area {
     display: flex;
     align-items: center;
-    min-width: 10%;
+    width: 10%;
 }
 
 #reset-btn {
-    width: 2rem;
-    height: 2rem;
+    width: 2em;
+    height: 2em;
     background-image: url("https://github.com/CharlesAta/Blackjack/blob/master/assets/imgs/1200px-Refresh_icon.svg.png?raw=true");
     background-repeat: no-repeat;
     background-size: cover;
@@ -101,8 +101,8 @@ h2 {
 }
 
 #bg-music-btn {
-    width: 2rem;
-    height: 2rem;
+    width: 2em;
+    height: 2em;
     background-repeat: no-repeat;
     border: none;
     background-color: rgba(255, 255, 255, 0.9);
@@ -111,9 +111,6 @@ h2 {
 /* vvv MESSAGE AREA STYLING vvv */
 #message-area {
     grid-area: msg;
-    min-width: 90%;
-    justify-self: center;
-    align-self:flex-start
 }
 /* ^^^ MESSAGE AREA STYLING ^^^ */
 
@@ -134,13 +131,13 @@ h2 {
     justify-self: left;
     text-align: center;
     box-shadow: 0 0 10px 20px rgba(83, 83, 95, 0.781);
-    width: 50%;
+    width: 45%;
     height: 96%;
     margin-left: 20px;
 }
 
 .wallet-ttl {
-    font-size: 1.9em;
+    font-size: 2em;
 }
 
 .betting-div {
@@ -165,8 +162,8 @@ h2 {
     text-align: center;
     text-decoration: none;
     color: white;
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 40%;
+    height: 40%;
     font-family:Arial, Helvetica, sans-serif;
     box-shadow: 2px 3px 3px 1px rgba(0, 0, 0, 0.4);
 }
@@ -216,7 +213,7 @@ h2 {
 
 #double-area {
     width: 100%;
-    height: 3rem;
+    height: 10%;
 }
 /* ^^^ BETTING AREA STYLING ^^^ */
 
@@ -229,7 +226,6 @@ main {
 #game-table {
     border-radius: 50%;
     height: 100%;
-    width: 100%;
     background-image: url("https://github.com/CharlesAta/Blackjack/blob/master/assets/imgs/breaking-down-the-table.png?raw=true");
     background-repeat: no-repeat;
     background-size: cover;
@@ -289,16 +285,13 @@ footer {
     grid-area: ftr;
     display: grid;
     grid-template-columns: 15% 1fr 30% 1fr 15%;
-    height: 100%;
-    align-self: end;
 }
 
 #play {
     grid-column: 1 / 2;
     width: 100%;
     height: 75%;
-    justify-self: center;
-    align-self: end;
+    place-self: center;
 }
 
 #moves {
@@ -307,8 +300,7 @@ footer {
     align-items: center;
     grid-column: 3 / 4;
     width: 100%;
-    height: 70%;
-    align-self: end;
+    height: 75%;
 }
 
 #dealer-current-hand {
