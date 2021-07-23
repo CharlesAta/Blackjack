@@ -85,4 +85,4 @@ Enjoy some smooth jazz as you place your bets and aim to win big against the hou
 - Background Music by [Dee Yan-Key](https://freemusicarchive.org/music/Dee_Yan-Key)
 - Sound Effects by [Zapsplat](https://www.zapsplat.com/)
 - Background Image by [Patricia Kelen](https://www.artstation.com/artwork/gJOXRE)
-- CSS styling resources cited in external-styles.css
+- CSS styling resources cited in styles.css
