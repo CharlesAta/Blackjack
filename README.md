@@ -26,7 +26,6 @@ Enjoy some smooth jazz as you place your bets and aim to win big against the hou
 - HTML
 - CSS
 - JavaScript
-- jQuery
 
 ## :diamonds: Getting Started 
 
