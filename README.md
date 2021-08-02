@@ -12,6 +12,10 @@ Enjoy some smooth jazz as you place your bets and aim to win big against the hou
 
 ## :camera: Screenshots
 
+### Video Demo:
+
+[Project Demo](https://youtu.be/phWlv0cd0KA)
+
 ![Alt text](https://github.com/CharlesAta/Blackjack/blob/master/assets/imgs/OpeningScreen.png?raw=true)
 ---
 ![Alt text](https://github.com/CharlesAta/Blackjack/blob/master/assets/imgs/MiddleRound.png?raw=true)
